@@ -1,8 +1,0 @@
-O que é a programação esportiva?
-É um esporte mental em que em um competição, ganhará quem resolve mais problemas no mesmo período de tempo.
-
-- Participantes precisam criar programas
- - que resolvem problemas computacionais de acordo com uma especificação
-
-É necessário estudar C para realizar a olimpíada e estudar para a OBI (Olimpíada Brasileira de Informática)
-https://olimpiada.ic.unicamp.br/pratique/pu/exemplo_c
