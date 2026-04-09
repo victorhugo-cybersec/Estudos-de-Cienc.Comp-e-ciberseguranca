@@ -1,0 +1,21 @@
+algoritmo = um processo da solução para um problema que tenha padrões, onde a solução é finita e bem definida
+
+tipos de algoritmos: 
+Descrição narrativa:
+Uma descrição literal de cada etapa de um processo que faz parte do algoritmo. Ou o algoritmo em si.
+
+Fluxograma:
+Uma representação escrita em símbolos gráficos, tornando a lógica mais compreensível.
+
+Pseudocódigo:
+A escrita é dotada regras predefinidas, de instruções.
+Vantagem: É fácil a transcrição para algo compreensível para o computador.
+Desvantagem: É necessário aprender as regras do pseudocódigo.
+
+Método para construir algoritmos:
+1. Ler atentamente o anunciado
+2. Definir os dados de entrada
+3. Definir o processamento.
+4. Definir os dados de saída
+5. Construir o algoritmo utilizando um dos tipos de algoritmos.
+6. Testar o algoritmo realizando simulações.

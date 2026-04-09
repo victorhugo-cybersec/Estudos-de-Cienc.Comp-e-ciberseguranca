@@ -1,0 +1,32 @@
+Profundidade de cor:
+A quantidade de dados para representar 1 cor:
+- HiColor:
+16 bits: 5 bits usados para cada numero em um valor rgb com o bit extra as vezes usado para representar transparencia
+- TrueColor:
+24 bits: 8 bits usados para cada numero em um valor RGB
+
+Pixels:
+Pontos individuais utilizados para criar uma imagem.
+
+Bitmap: 
+Contém os valores de cor de pixel da imagem da esquerda para a direita e de cima para baixo. Tem suporte para TrueColor e compactação.
+GIF (Cor indexada):
+Cada imagem é composta por apenas 256 cores.
+JPEG:
+Cores com pouca diferença entre elas são igualadas em imagens. A qualidade fica ruim, porém armazenamento melhor.
+PNG:
+Basicamente um GIF, porém com mais qualidade na variante de cores.
+
+Etapas para saber os bits de uma imagem:
+1 - Calcular a quantidade de Pixels
+2 - Bits por pixel (8 + 8 + 8 = 24 bits)
+3 - Tamanho da imagem em bits
+
+Fórmula para calcular tamanho de um áudio:D
+tam = DELTAt . Fs . B . C + meta
+Tam = tamanho do arquivo em bytes
+delta t = tempo total do audio em esgundos
+Fs = frequência de amostragem em Hz
+c = número de canais de audio
+b = quantidade de bytes pode amostra
+meta = tamanho em bytes ocupado pelos metadados do arquivo

@@ -1,0 +1,329 @@
+número em binário:
+usa o mesmo sistema do decimal so que limitado a 2 números (0 e 1)
+
+como converter binário para decimal:
+ex; número binário 101
+o 1 é o terceiro número
+pegamos o 1 e multiplicamos por 2 elevado pela posição do número
+o 0 é o segundo número
+neste caso tudo multiplicado por 0 é igual a 0
+o 1 é o primeiro número
+pegamos o 1 e multiplicamos por 2 elevado pela posição do número
+e no fim somamos tudo
+ou seja:
+1 x 2^2 + 0 x 2^1 + 1 x 2^0 = 5decimal
+
+e para transformar em binário?
+ex; número 20
+pegamos 20 e dividimos por 2
+resultado: 10 com resto 0
+pegamos 10 e dividimos por 2
+
+resultado: 5 com resto 0
+pegamos 5 e dividimos por 2 
+resultado: 2 com resto 1
+pegamos 2 e dividimos por 2
+resultado: 1 com resto 0
+pegamos 1 e dividimos por 2
+resultado: 0,5 (não importa) com resto 1 (importa)
+logo, pegando os restos do fim ao início:
+20 em binário é igual à: 10100
+
+é impossível um número começar com zero de acordo com a lógica de que a conta só acaba ao dividir 1 por 2, mas o 0 no binário é igual a 0, 
+então essa exceção faz isso não ser verdadeiro.
+
+também é possível transformar um número em binário pelas potências de 2:
+ex; número 100
+a potência maior que 100 e mais próxima de 100 é 128, que seria 2^7
+sendo assim, é necessário representar uma ordem decrescente das potências, começando por 2^7
+
+
+2^7 2^6 2^5 2^4 2^3 2^2 2^1 2^0
+128  64 32   16  8   4   2   1
+
+e para cada número, vamos colocar 1 ou 0 dependendo do que pode ser somado ou não e que não ultrapasse 100, até ser igual a 100
+então:
+
+2^7 2^6 2^5 2^4 2^3 2^2 2^1 2^0
+128  64  32  16  8   4   2   1
+ 0   1   1   0   0   1   0   0
+
+pois 64 + 32 + 4 = 100 que é o número desejado
+logo, tirando os zeros da esquerda do número(que nem na formatação, na hora de armazenar dados), teremos o número em binário: 1100100
+
+pra contar os números em código binário, é possível seguir uma lógica de "tetris",
+onde 1s vão caindo da direita para a esquerda, e quando chega ao limite de 1s naquela numeração (unidade, dezena, centena etc), 
+o primeiro 1 avança uma casa e os outros 1s são deletados, e assim vai, até o milhar, onde se mantém o 1 no milhar mas o processo recomeça:
+
+0000 = 0
+0001 = 1
+0010 = 2
+0011 = 3
+0100 = 4
+0101 = 5
+0110 = 6
+0111 = 7
+1000 = 8
+1001 = 9
+1010 = 10
+1011 = 11
+1100 = 12
+etc.
+
+todo número que termina em 1 é ímpar, e todo número que termina em 0 é par.
+
+lógica proposicional:
+proposição: oração declarativa de sentido lógico completo que pode ter somente um dos dois valores (V ou F)
+2 + 3 = 4 é falso mas é uma proposição
+
+princípios da lógica:
+princípio da identidade:
+    uma proposição verdadeira é verdadeira e uma proposição falsa é falsa.
+princípio da não-contradição:
+    uma proposição não pode ser verdadeira e falsa ao mesmo tempo.
+princípio do terceiro excluído:
+    toda proposição precisa ser verdadeira ou falsa. Não há uma terceira opção.
+.
+
+representação das proposições:
+
+normalmente são usadas letras para representar proposições, e podem ser maiúsculas ou minúsculas.
+proposições tem verbos e são bem definidas, e não são orações exclamativas, nem interrogativas, imperativas, nem orações sem sujeito determinado, nem sentenças abertas, 
+nem orações contraditórias, como "essa declaração é falsa" (paradoxos também, por exemplo).
+
+proposições simples e compostas:
+
+proposições simples não contém outras proposições integradas à si mesmas, ou seja, não podem ser divididas em outras proposições
+
+proposições compostas possuem duas ou mais proposições integradas à si mesmas, por exemplo: "João tem um carro e seu carro é marrom", se joão não ter um carro, a proposição inteira é falsa,
+assim como será falsa se o carro não for marrom. Também é possível dividir em duas proposições: "João tem um carro", "O carro de João é marrom" onde uma pode ser verdadeira e a outra não.
+também é possível existirem proposições como: "Ou João é professor, ou João é engenheiro", assim como "Se chover, então vou ao cinema" e "Eu só vou passar de ano somente se eu estudar".
+
+como saber se uma proposição composta pode ser falsa?
+
+será necessário saber o valor lógico de cada proposição simples dentro da composta, e saber o conector usado para interligar essas proposições simples.
+
+tabela verdade:
+ex:
+P   Q   P^Q
+F   F    F
+F   V    F
+V   F    F 
+V   V    V
+
+O F e o V podem ser substituídos por 0 e 1. Sem contar o cabeçalho, o número de linhas da tabela verdade é sempre 2 elevado a N, onde N é o número de proposições
+Ex:
+Se chover e cair gelo, eu não vou ao cinema
+
+são 3 proposições
+
+
+2^3 = 8
+
+CHOVER  CAIR GELO  CINEMA  CH + CG = CI
+   F        F         F         F  LINHA 1
+   F        F         V         V  LINHA 2
+   V        F         V         F  LINHA 3
+   V        F         F         F  LINHA 4
+   F        V         V         F  LINHA 5
+   F        V         F         F  LINHA 6
+   V        V         F         F  LINHA 7
+   V        V         V         F  LINHA 8
+.
+
+Operadores lógicos:
+George Boole: transformou a lógica proposicional em argumentos matemáticos
+Claude Shannon: inventou o conceito de porta lógica: recebem um sinal de entrada e respondem com um sinal de saída de acordo com o sinal da entrada
+
+Operador NOT:
+Operador unário, tem símbolo de til (~)
+
+ex: P: José gosta de bananas.
+~P: José não gosta de bananas.
+
+Tabela verdade da negação:
+
+P   ~P 
+F    V 
+V    F 
+
+Porta lógica da negação: proposição como entrada, não proposição como saída. Sempre que tiver uma bolinha depois da porta lógica, significa negação. Ex: P |>* ~P
+
+Operador de conjunção:
+Operador binário, tem símbolo de ^
+
+ex: ^P: Pedro não gosta de maçã e não gosta de tomate.
+
+Tabela verdade da conjunção: (Ex: João foi à feira comprar bananas e maçãs).
+
+Tem 2 proposições: 2^2 = 4: 4 linhas na tabela verdade:
+
+P  Q  P^Q 
+F  F   F 
+F  V   F 
+V  F   F 
+V  V   V
+
+Porta lógica da conjunção: duas proposições ou mais como entrada, resultando nas proposições juntas com um . entre elas (não é ^ pois na álgebra booleana é usado o .).
+Ex: 
+
+P
+  |> P . Q
+Q 
+
+Operador disjunção inclusiva:
+Operador binário, tem símbolo de um acento circunflexo para baixo (v)
+
+Ex: vP: Maria vai ao cinema alternativamente ao teatro.
+
+Tabela verdade da disjunção inclusiva: (Ex: João vai à feira comprar laranjas ou bananas).
+
+P   Q   PvQ
+F   F    F 
+F   V    V 
+V   F    V 
+V   V    V
+
+Porta lógica da disjunção inclusiva: duas proposições ou mais como entrada, resultando nas proposições juntas com um + entre elas (não é v pois na álgebra booleana é usado o +).
+Ex: 
+
+P 
+   >> P + Q
+Q
+
+Operador disjunção exclusiva (Operador XOR):
+Operador binário, tem o símbolo de ⊕ ou v com underline em baixo
+
+Ex: ⊕P: Ou Maria vai ao cinema, ou Maria vai ao teatro.
+
+Tabela verdade da disjunção exclusiva: (Ex: Ou João vai à feira comprar laranjas ou João vai à feira comprar bananas).
+
+P   Q   P⊕Q
+F   F    F 
+V   F    V 
+F   V    V
+V   V    F 
+
+Porta lógica da disjunção exclusiva: duas proposições ou mais como entrada, resultando nas proposições juntas com um ⊕ entre elas.
+Ex:
+
+P
+  ))> P⊕Q
+Q
+
+Operador condicional:
+Operador binário, tem o símbolo de ->
+
+Ex: P->Q: Se chover, eu vou ao cinema.
+
+Tabela verdade do operador condicional: (Ex: Se hoje o sol estiver forte, eu não irei treinar)
+
+P   Q   P->Q 
+V   V    V 
+F   V    V 
+V   F    F 
+F   F    V
+
+Porta lógica do operador condicional: uma proposição pode levar à ocorrência da outra, se a proposição ocorrer mesmo que a outra não tenha sido necessária, ainda será verdadeiro.
+Ex:
+P -> Q
+
+Operador bicondicional:
+Operador binário, tem o símbolo de <->
+
+Tabela verdade do operador bicondicional: (Ex: Se e somente se chover, eu vou ao cinema)
+
+P  Q  P<->Q
+V  V    V
+F  V    F
+V  F    F 
+F  F    V 
+
+Porta lógica do operador bicondicional: uma proposição vai levar à ocorrência da outra, a não ser que não ocorra.
+Ex:
+P <-> Q ou [(P->Q) ^ (Q->P)]
+
+
+Condição necessária e condição suficiente:
+
+Condição suficiente:
+Condição máxima que garantidamente dará um resultado em específico se ela for atendida. (P é uma condição suficiente para Q)
+
+Condição necessária:
+Condição que dará um resultado do qual nunca ocorrerá se a condição não for atendida. (P é uma condição necessária para Q, e vice-versa.)
+
+
+Tautologia: no grego, "o mesmo assunto"
+Expressão composta sempre verdadeira, independente dos valores de entrada.
+Para identificar uma tautologia, todas as linhas da expressão final na tabela verdade tem que ser verdadeiras, não importa o tamanho da tabela.
+
+Contradição:
+Expressão composta sempre falsa, independente dos valores de entrada.
+Para identificar uma contradição, é seguida a mesma linha de raciocínio da tautologia, só que todas as linhas da expressão final tem que ser falsas.
+
+Contingência:
+Expressão lógica que não é tautologia nem contradição.
+
+Negação de proposição:
+Simplesmente nega o fato. Não necessariamente é o contrário daquele fato, apenas quando é uma proposição com possibilidades binárias.
+Ex1: P: João é feio. 
+~P: João não é feio.
+Ex2: P: O número é ímpar.
+~P: O número é par.
+
+Augustus De Morgan: Criador da indução matemática.
+
+Lei de De Morgan:
+~(P ^ Q) = (~P v ~Q)
+Ex: João não trabalha e Maria fica em casa
+~P: João trabalha ou Maria não fica em casa
+
+Equivalências lógicas de condicional e bicondicional:
+Para negar condição, é necessário transformar a proposição em OU ou E, e negar a causa da condição.
+Ex1: Se eu nasci no Acre, então sou brasileiro.
+ao negar a causa da condição e transformar a frase em uma disjunção inclusiva:
+Eu não nasci no Acre ou sou brasileiro.
+
+Equivalências lógicas (Ou regras de equivalência)
+É usado o símbolo de = com mais um traço embaixo
+Com o uso de tabelas verdade, é possível provar que duas proposições ou mais são equivalentes logicamente.
+
+Regra condicional:
+(P -> Q) =_ (~P v Q)
+
+Propriedade da dupla negação:
+~(~P) =_ (P)
+
+Propriedade dos elementos neutros:
+P ^ (Verdadeiro) =_ P
+
+P v (Falso) =_ P
+
+Propriedades de dominação:
+P v (Verdadeiro) =_ (Verdadeiro)
+P ^ (Falso) =_ (Falso)
+
+Propriedades idempotentes:
+P v P =_ P 
+P ^ P =_ P 
+
+Propriedades comutativas:
+P v Q =_ Q v P 
+P ^ Q =_ Q ^ P 
+
+Propriedades associativas:
+
+(P v Q) v R =_ P v (Q v R)
+(P ^ Q) ^ R =_ P ^ (Q ^ R)
+
+Propriedades distribuitivas:
+P v (Q ^ R) =_ (P v Q) ^ (P v R)
+P ^ (Q v R) =_ (P ^ Q) v (P ^ R)
+
+Propriedades da absorção:
+P ^ (P v Q) =_ P 
+P v (P ^ Q) =_ P
+
+Propriedades da negação:
+P v ~P =_ (Verdadeiro)
+P ^ ~P =_ (Falso)

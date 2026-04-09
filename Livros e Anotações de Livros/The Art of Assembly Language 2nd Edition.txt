@@ -1,0 +1,56 @@
+------------------------------------ A anatomia do High-level Assembly (HLA):
+program pgmID;
+    Declarações
+begin pgmID;
+    Argumentos;
+end pgmID;
+
+pgmID = Program ID, especifica o nome do programa, todos devem usar o mesmo nome.
+
+Declarações = Aonde são declaradas constantes, tipos, variáveis, procedimentos/funções e outros objetos no HLA.
+
+Argumentos = A seção em que você coloca os seus argumentos executáveis para o seu programa principal.
+
+program, begin e end são palavras reservadas para esboçar o programa.
+
+O pgmID deve ter um nome que seja apropriado para o programa, e deve usar de regras usadas em nomes de variáveis de linguagens de alto nível.
+
+------------------ Um exemplo de programa muito usado para estudar é o helloWorld:
+
+program helloWorld;
+#include("stdlib.hhf");
+
+begin helloWorld;
+
+    stdout.put("Hello, World of Assembly Language", nl);
+
+end helloWorld;
+
+#include("stdlib.hhf") == o include inclui uma biblioteca padrão (standard library (stdlib)) do arquivo de cabeçalho HLA (HLA Header File), que nos oferece a declaração do código usado "stdout.put". Alguns códigos vão exigir mais bibliotecas, considerando que o .hhf oferece somente o básico.
+
+stdout.put = é o print do HLA, pode ser usado para escrever dados para o aparelho de output padrão, que geralmente seria o console.
+
+nl (new line) = quebra de linha, também derivado do .hhf, é uma constante de tipo string.
+
+; = sintaxe da linguagem HLA.
+
+O HLA pode automaticamente concatenar duas strings, ao serem declaras dentro de stdout.put por exemplo. A new line por ser uma string pode ser utilizada sem a vírgula, porém ela é uma das unicas exceções. É recomendado sempre usar a vírgula para separar os dados, considerando a existência de outros tipos de variáveis.
+
+Um arquivo HLA deve ser rodado por consoles, ou seja, pelo shell ou um prompt de comando do Windows.
+
+------------------------------------ Declaração de variáveis
+
+O HLA tem vários tipos de inteiros, como o int8, int16 e o int32, que correspondem a 1 byte, 2 bytes e 4 bytes, respectivamente. Declarações de variáveis típicas ocorrem na seção de variáveis estáticas do HLA (static variable section):
+
+static
+    i8: int8 := 8;
+    i16: int16 := 1600;
+    i32: int32 := -320000;
+
+static é a palavra chave para começar a seção de declaração de variáveis.
+
+i8, i16 e i32 são os nomes das variáveis a declararem.
+
+int8, int16 e int3 são os nomes dos tipos de dados para cada declaração.
+
+o símbolo := representa ao programa que você quer declarar a variável e já dar um valor inicial a ela, quais seriam os números inseridos à direita do símbolo.

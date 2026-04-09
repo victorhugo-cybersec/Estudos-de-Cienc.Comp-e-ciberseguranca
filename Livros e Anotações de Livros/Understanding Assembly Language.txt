@@ -1,0 +1,190 @@
+---------------- Capítulo 1
+
+--------Arquitetura de conjunto de instruções (ISA) = Todo CPU tem suas próprias instruções para mover dados entre registradores, trabalhar com memória, e realizar operações aritméticas primitivas.
+
+--------Código de máquina = Código que a CPU processa diretamente. Toda instrução é geralmente codificada por vários bytes.
+
+--------Linguagem Assembly = Feito pra facilitar a vida do programador em ler código de máquina.
+
+--------Flow de execução = É a ordem em que as instruções de um programa são executadas pela CPU. Ao mudar o flow de execução de lugar, você está mudando o endereço para qual a CPU vai continuar lendo aquelas instruções, seja num endereço acima ou abaixo.
+
+--------Caller = O endereço no qual uma função for chamada, se chama caller. Esse endereço é retomado no final das funções, a fim de retornar à onde o código havia parado.
+
+--------Registradores de CPU = São o RAM do CPU, basicamente utilizados para não ter que ir até o RAM e armazenar e resgatar informações de lá, tendo em consideração eficiência. Um registrador de CPU pode ter uma memória pequena, utilizada apenas para guardar informações que estão sendo usadas durante o processamento.
+
+--------Assembler e linker = O assembler (montador) traduz código em linguagem assembly para código de máquina, que seria o binário, criando um arquivo objeto. O linker (ligador) pega um ou mais arquivos objeto criados e os junta, a fim de criar um único arquivo executável final. Ou seja, o assembler traduz para a máquina o código escrito em assembly para binário, e o linker organiza e conecta o código num todo.
+
+--------Stack (pilha) = O stack é uma região de memória que é usada para gerenciar a execução de funções, armazenar variáveis locais e endereços de retorno. O stack fica dentro do RAM, porém em muitas vezes, dados do stack acabam ficando no cache quando estão sendo usados, o que permite uso eficiente deles, considerando que o cache é inúmeras vezes mais rápido do que o RAM. A pilha cresce à medida em que funções são chamadas, e diminui quando retornam.
+
+--------Stack frame = Possui argumentos de função, variáveis locais, e endereço de retorno para o caller. É um bloco de dados empilhado na stack sempre que uma chamada de função é feita. Exemplo:
+
+---Ao chamar funcaoA(), um stack frame é criado. Se funcaoA chamar funcaoB(), um novo frame para funcaoB é empilhado sobre o da funcaoA. Quando funcaoB termina, seu frame é removido, e a funcaoA retoma de onde parou.
+
+--------Base Pointer e Stack Pointer (EBP e ESP no x86) = São circuitos físicos de silício dentro do CPU, feitos para facilitar processamento de funções. O base pointer é analogicamente um ponto 0 num eixo X, que é definido no stack frame que estiver sendo utilizado, e para se referir aos dados dentro desse stack frame, é utilizado o base pointer como ponto de referência para se referir a esses dados, onde, à sua esquerda (números negativos (endereços de memória menores)) é possível encontrar as variáveis locais da função (EBP -4 = Primeira variável local, EBP -8 = Segunda variável local, e assim vai) e à sua direita (números positivos (endereços de memória maiores)) é possível encontrar o endereço do caller, e os argumentos da função (EBP +4 = Endereço do caller, EBP +8 = Primeiro argumento, EBP +12 = Segundo argumento, e assim vai). O Stack Pointer basicamente aponta ao topo do stack, ou seja, mostra o argumento/variável local mais recente que foi criado no fluxo de processamento de instruções. (como a stack na RAM cresce de cabeça para baixo, o "topo" do stack para onde o ESP aponta é, na verdade, o endereço de memória mais baixo em uso naquele momento).
+
+--------chmod = É um comando utilizado em sistemas Unix-like como o linux e o MacOS, utilizado para definir as permissões de arquivo para certos usuários, onde o primeiro digito é destinado ao dono do arquivo, o segundo, ao grupo em que o arquivo vai pertencer, e o terceiro, para todo mundo. Para representar essas permissões, são utilizados os números de 0 a 7 do sistema octal, que em binário, representam do número 000 até o 111 (especificamente 3 casas), sendo cada digito de cada casa, a representação de read, write, e execute, respectivamente. Ou seja, se queremos dar permissão geral para o autor do arquivo, permissão de ler e executar para o grupo, e permissão de somente executar para todos, isso seria representado como: 111 101 001, ou seja, 111101001, que ao ser convertido para octal, fica 751, ou seja, o comando ficaria como: chmod 751. Também é possível considerar que read = 4, write = 2 e execute = 1, ou seja, 751 = 4 + 2 + 1, 4 + 1, 1, que fica 7 5 1, tornando muito mais fácil para executar o comando.
+
+--------Divisibilidade = Na base decimal, é visto que quando um número termina em 0, é possível dividir ele por 10, assim como na base hexadecimal, um número terminado em 0 pode ser dividido por 10 ou 16, e na base binária, divisível por 10.
+
+--------Aritmética de múltipla precisão e base octal: Quando um número é muito grande para caber em um tipo normal como int, ele é quebrado em pedaços menores, como um byte, que pode armazenar de valores entre 0 a 255 (2 elevado a 8), isso é aritmética de múltipla precisão. Agora, ao usar o int32 que representa 2 elevado a 32 como base, é possível armazenar de 0 a aproximadamente 4 bilhões.
+
+--------Ao criar uma função que não retorna nada, ela fica representada assim em Assembly:
+
+--------GCC/MSVC (x86):
+
+f:
+    ret 
+
+(Apenas uma instrução (ret), que retorna a execução para quem chamou a função)
+
+--------ARM:
+
+f   PROC
+    BX     lr
+    ENDP
+
+O endereço de retorno não é salvo no stack local ao usar o ARM, ele usa Link Register (LR), que seria um registrador que armazena o endereço no qual o computador tem que voltar depois que a função acabar. Ou seja, ao usar BX lr, ele termina o processo da função e retorna ao caller.
+
+--------MIPS:
+
+    j   $31
+    nop
+
+Tem dois métodos convencionais usados no MIPS quando são nomeados registradores: por número (de $0 a $31) ou por pseudo-nome ($V0, $A0, etc), o GCC (Compilador usado para transformar código C/C++ em MIPS Assembly e arquivos binários) utiliza de registradores com números, como o exemplo acima, e o IDA (Analiza binários de MIPS para gerar código de assembly legível, e gera código pseudo-C para reconstruir a lógica do programa) utiliza de registradores com pseudo-nomes, assim como no exemplo abaixo:
+
+    j $ra
+    nop
+
+A primeira instrução é a de pular (J ou JR) que manda o flow da execução para o caller.
+
+--------Outra função simples é a que retorna um valor constante:
+
+int f(){
+
+    return 123;
+
+}
+
+--------GCC/MSVC (x86):
+
+f:
+    mov     eax, 123
+    ret
+
+A primeira instrução move o valor 123 dentro do registrador EAX, que é geralmente um registrador utilizado para armazenar valor de retorno de uma função comum, e a segunda instrução retorna execução ao caller, e o caller, obviamente, pega o resultado da função pelo registrador EAX.
+
+--------ARM:
+
+f   PROC
+    MOV     r0,#0x7b
+    BX      lr
+    ENDP
+
+O ARM usa o registrador r0 para retornar os valores da função, assim como o EAX do GCC/MSVC, então 123 é armazenado no registrador r0. O mov, mesmo que dê a entender que seja mover, na verdade copia os dados dos quais a instrução for usada.
+
+--------MIPS:
+
+----GCC:
+
+j   $31
+li  $2,123
+
+----IDA:
+
+jr  $ra
+li  $v0, 0x7B
+
+O registrador para retorno de função do MIPS é o $2 ou $v0, e a instrução LI (Load Immediate) é equivalente ao MOV do ARM/x86. A instrução jr pula o fluxo para o caller, porém, diferentemente de outras arquiteturas, a linha após o jump sempre é executada no MIPS, por isso o número é retornado depois de jump, e isso se chama delay slot.
+
+--------Agora, um código de C que apenas diz Hello World:
+
+#include <stdio.h>
+
+int main() {
+
+    printf("Hello, world\n");
+    return 0;
+
+}
+
+--------MSVC (x86):
+
+CONST   SEGMENT ; começo de declaração de uma constante
+
+$SG3830 DB      'hello, world', 0AH, 00H ; DB significa "define byte", ou seja, define o byte que vai representar a constante sendo declarada.
+
+CONST   ENDS ; fim de uma declaração de uma constante
+
+PUBLIC  _main ; deixa a função _main visível para o linker
+
+EXTRN   _printf:PROC ; EXTRN diz para o assembler que a função existe, só que está em outro arquivo/biblioteca.
+
+_TEXT   SEGMENT ; início do segmento de instruções
+
+_main   PROC ; início da função _main
+
+push    ebp ; salva o base pointer antigo na stack
+
+mov     ebp, esp ; cria um novo stack frame
+
+push    OFFSET $SG3830 ; empilha o endereço da string "hello, world" para o novo stack frame. OFFSET pega o endereço na memória, não o valor dela
+
+call    _printf ; chama a função printf, usando o endereço da string de argumento
+
+add     esp, 4 ; remove o argumento passado
+
+xor     eax, eax ; eax = 0, que é o valor de retorno da função main. XOR (sim, o xor de exclusive or) é usado porque usa 2 bytes ao invés de 5 bytes que é usado na instrução MOV. Ou seja, o código visualmente parece complicado, mas no fim é só um uso de instruções diferentes pra buscar otimização
+
+pop     ebp ; restaura o EBP antigo do stack frame inicial
+
+ret     0 ; retorno da função, ou seja, volta para o caller
+
+_main   ENDP ; fim da função _main
+
+_TEXT   ENDS ; fim do segmento de instruções
+
+O MSCVC usa a sintaxe Intel. Existem duas formas de escrever sintaxes no assembly x86, as sintaxes Intel e AT&T, onde o Intel é usado no MSVC (Microsoft Visual C++), e o AT&T é usado no Linux/Unix.
+
+O compilador cria o arquivo l.obj, que está linkado ao l.exe. Nesse caso, o arquivo contém dois segmentos: CONST (para dados constantes) e _TEXT (para código). A string "hello, world" em C/C++ é de tipo const char[], porém esse tipo não tem um nome, então o compilador lida com o nome o chamando internamente de $SG3830.
+
+O C/C++ sempre termina com um zero no final da string, que é representado no código Assembly acima, onde ao definir a constante, no final há o 00H, que representa o final da string por meio de um valor nulo (o byte 00000000). O \n é representado por 0AH nesse mesmo código, e vem antes do fim da string (00H), logicamente.
+
+--------call = Instrução com intuito de executar uma função, pode receber argumentos ao serem escritos instruções de push anteriormente ao call (colocando argumentos no stack frame) tem um push invisível dando o endereço de caller, e depois um jump diretamente para a primeira linha da função que foi chamada pela própria instrução call. Ao dar push em mais de um argumento em uma função que necessita de mais argumentos, é necessário dar push em uma ordem invertida. Exemplo:
+
+---Uma função chamada divideNums(dividendo, divisor) é criada, essa função deve ser chamada e executada com dois valores como argumento: o valor 10 que será o dividendo, e o valor 5 que será o divisor (ou seja, a ordem importa), logo, a ordem para dar push ao dar esse comando seria:
+
+push 5
+push 10
+call divideNums
+
+---Pois ao pensar em stack frame, é necessário pensar numa literal pilha de coisas, como pratos. Ao inserir um prato primeiro e depois outro, o outro prato será o primeiro prato a ser retirado, e então, o segundo prato a ser retirado será o primeiro que você colocou naquela pilha.
+
+--------GCC (x86)
+
+main    proc near
+
+var_10  = dword ptr -10h
+
+        push    ebp
+        mov     ebp, esp
+        and     esp, 0FFFFFFF0h
+        sub     esp, 10h
+        mov     eax, offset aHelloWorld ; "hello, world\n"
+        mov     [esp+10h+var_10], eax
+        call    _printf
+        mov     eax, 0
+        leave
+        retn
+main    endp
+
+--------AND no GCC = É um "molde" (máscara de bits) para filtrar o endereço do dado que está no registrador que estiver sendo usado. Aonde estiver 1s, o dado passa, e aonde estiver 0s, o dado é convertido em zeros. Caso haja um dado de 12 bits: 111000110111 no registrador ESP, ao moldar esse dado para preservar os primeiros 6 bits e descartar o resto (transformar em 0), seria feito: "and esp, 0FC0h", logo o dado ficaria: 111000000000. Essa instrução é feita a fim de facilitar ao processador de interpretar o endereço daquele dado no registrador, o tornando um múltiplo de 4, permitindo com que ele puxe o dado em 1 ciclo de viagem.
+
+O resultado é quase o mesmo, o endereço da string é guardado no registrador EAX, e então salvo no stack frame. Além disso, o comando AND ESP, 0FFFFFFF0h alinha o endereço do valor no registrador ESP em um limite de 16 bytes, devido à eficiência do processador com alinhamento a múltiplos de 4.
+
+O comando SUB ESP, 10h aloca 16 bytes no stack frame para manter o padrão do limite de 16 bytes, mesmo que apenas 4 bytes sejam necessários nessa situação. E depois a função printf() é chamada, assim que a string é alocada no ESP.
+
+Diferentemente do MSVC, o GCC usa MOV, ao invés de XOR que é usado no MSVC, quando ambos estão sem otimização ligada.
+
+O comando leave faz automaticamente a função de retornar o ESP e o EBP para o início.
+
+Na linha de MOV que vem logo após o SUB ESP, 10h, vemos uma soma dentro de colchetes. O programa, nessa linha, basicamente pega o que estiver no EAX e joga para o esp +0, pois a var_10 é igual a -10h, e ao somar +10h com -10h, resulta em 0. O esp está em colchetes, pois o programa quer mostrar ao computador que este valor está na memória RAM, e não na CPU.

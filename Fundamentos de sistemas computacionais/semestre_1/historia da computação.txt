@@ -1,0 +1,51 @@
+Computação: 
+A área que abrange tudo da tecnologia
+
+Informática: 
+subárea focada no uso da tecnologia para processar e gerenciar informações
+
+Sistema computacional: 
+Conceito abrangente que envolve um ou mais computadores interconectados, necessita de hardware,
+software, e do usuário(s).
+
+Dados, software e hardware são os pilares da computação.
+
+Blaise Pascal e Gottfried William Leibnez foram um dos primeiros a criarem calculadoras, como a máquina de Pascal.
+
+Joseph Marie Jacquard fez uso de cartões perfurados para máquinas de tear reproduzirem tecidos com padrões.
+
+Charles Babbage criou um computador mecânico programável, a máquina analítica, e foi considerado o pai do computador.
+
+Ada Lovelace ajudou Charles Babbage na criação da máquina analítica, criou o conceito de algoritmo computacional e foi considerada a 
+primeira programadora da história.
+
+George Boole apresentou os conceitos da álgebra lógica, permitindo os computadores modernos.
+
+William Burroughs foi o criador da primeira calculadora de uso pessoal.
+
+Alan Turing criou o conceito teórico da computação universal, conhecido como "pai da ciência da computação".
+
+Máquina de Turing: Conceito filosófico da máquina perfeita.
+
+Teste de Turing basicamente decide se a IA pode ser diferenciada de um ser humano ou não.
+
+Antes do sistema de Boole, os computadores tinham uma base decimal, e os sinais elétricos assumiam 10 valores diferentes.
+Após o sistema de Boole, todos os computadores assumiram a base binária, onde os sinais elétricos assumiam apenas 2 valores.
+
+Harvard Mark I: Primeiros computadores eletromecânicos programáveis, junto com o ENAC
+
+Eram usadas lâmpadas na primeira geração de computadores, que quando ligadas representavam 1, e desligadas, 0.
+A programação era feita por cartões perfurados, e trouxe como linguagem de programação a Assembly, não tendo abstração, e as ferramentas
+sendo rudimentares.
+
+A segunda geração introduziu os transistores, tornando os computadores menores e mais eficientes, e surgiram as primeiras linguagens
+de programação COBOL e FORTRAN, houve também o aumento de abstração e produtividade.
+
+A terceira geração introduziu os circuitos integrados, onde permitiu os computadores serem mais acessíveis e eficientes, assim como
+o armazenamento também foi aprimorado.
+
+A quarta geração trouxe os microprocessadores, computação quântica e outras tecnologias mais atuais, além da programação orientada a objetos.
+
+A quinta geração é a atual e é a era da inteligência artificial.
+
+COMUNICAÇÕES[APLICATIVOS[SISTEMAS OPERACIONAIS[PROGRAMAÇÃO[HARDWARE[INFORMAÇÃO]]]]]

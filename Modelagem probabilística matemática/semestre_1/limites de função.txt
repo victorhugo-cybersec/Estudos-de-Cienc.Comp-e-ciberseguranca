@@ -1,0 +1,32 @@
+1 - Noção intuitiva de limites
+
+O limite estuda o comportamento da função f(x) à medida que a variável "x" se aproxima de um valor específico "a" sem necessariamente atingí-lo, independente de f(a) existir ou não, ou de ser igual ao limite.
+
+Ex: lim x² = 9, x->3 (x tende à 3)
+
+Pela esquerda (números menores do que "a", onde geralmente é uma tabela crescente):
+Quando X é 2, f(x) é 4.
+Quando X é 2,9, f(x) é 8,41.
+
+Pela direita (números maiores do que "a", onde geralmente é uma tabela decrescente):
+Quando X é 4, f(x) é 16.
+Quando X é 3,1, f(x) é 9,61.
+
+E esses números decimais são diminuídos e aumentados, à fim de estudar os limites da função.
+
+Ex2: x²-1 / x-1 onde x = 1, neste caso, a função f(x) quando "a" se iguala a 1, trás um resultado indeterminado. (0/0)
+
+Ao observar o comportamento de f(x) quando x = 1, temos que:
+
+Pela esquerda:
+Quando x é 2, f(x) é 3.
+Quando x é 1,1, f(x) é 2,1.
+
+Pela direita:
+Quando x é 0, f(x) é 1.
+Quando x é 0,9, f(x) é 1,9.
+
+Nesse caso, como dos dois lados, há uma tendência ao número 2, então o limite dessa função f(x) quando x tende à 1, é igual à 2.
+Logo: x->1 lim x² - 1 / x - 1 = 2, pois é nítido que ele se aproxima muito de 2.
+
+Quando há dois limites definidos (pela esquerda =! pela direita), o limite da função quando x => a, não existe.

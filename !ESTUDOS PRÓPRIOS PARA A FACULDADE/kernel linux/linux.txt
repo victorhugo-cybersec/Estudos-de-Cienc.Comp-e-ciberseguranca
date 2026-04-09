@@ -1,0 +1,121 @@
+------------------------------------------- linux: comandos básicos de comunicação com o shell
+
+--------------------- echo = imprime no console o que você digitar após escrever echo.
+--------------------- pwd (print working directory) = imprime o caminho em que você está, começando do root (/).
+
+Há duas maneiras de especificar um caminho no linux: absoluta e relativa.
+
+Caminho absoluto:
+É o caminho todo, começando do root (/). O root é o nível mais alto do sistema de arquivos. Todo caminho que começa com um / é um caminho absoluto.
+Caminho relativo:
+É relativo a onde você estiver no sistema de arquivos. Se você estiver no "/home/Victor/documents" por exemplo, e quiser acessar um subdiretório chamado "photos", basta especificar: "photos/".
+
+--------------------- cd (change directory) = pode usar caminho relativo e absoluto para você entrar em um outro caminho. Ex1: cd /home/Victor/documents Ex2 (já estando no subdiretório Victor): cd documents/
+
+Shortcuts para facilitar navegação em arquivos:
+. = representa o diretório em que você está.
+.. = se refere ao diretório parente do seu atual. (Ex: você estava no diretório /home/Victor, o .. iria se referir ao /home).
+~ = shortcut que se refere ao seu diretório pessoal (Ex: /home/Victor).
+- = te leva ao diretório que você estava antes (Ex: você saiu de /home/Victor/Documentos e foi para /home/Victor, ao usar -, você se refere ao Documentos/).
+
+--------------------- ls (list directories) = lista os diretórios e arquivos no seu caminho atual, também pode receber input de um caminho específico, à fim de listar os diretórios e arquivos do tal caminho dado no input.
+
+o ls pode acabar não listando arquivos escondidos, logo, para isso acontecer, deve ser utilizado, depois do caminho, a flag "-a" que se refere à "tudo".
+
+a flag "-l" (long) mostra uma lista detalhada dos arquivos num formato longo, começando pela esquerda: pemissões do arquivo, número de links, nome do dono, dono do grupo, tamanho do arquivo, tempo desde a última alteração, e o nome do arquivo ou diretório.
+
+a flag "-r" lista os arquivos e diretórios em ordem alfabética reversa, é útil para ver os últimos arquivos em uma lista longa de arquivos.
+
+para combinar flags, basta colocar de qualquer ordem a letra da flag junto com a outra antes do hífen. (Ex: ls .. lar).
+
+--------------------- touch = Seu propósito é alterar o horário e dia em que algum arquivo foi atualizado, ou seja, literalmente tocar aquele arquivo, mostrar que alguém mexeu nele, mas pode também, e é comumente usado para criar novos arquivos com um nome que ainda não exista. Também é possível criar vários arquivos simultaneamente, basta escrever um em sequência do outro com um espaço em branco. (Ex: touch anotacoes.txt rotina.txt (irá criar um arquivo .txt com o nome anotacoes e um arquivo .txt com o nome rotina no caminho em que você estiver)).
+
+a flag "-r" é utilizada para igualar a data de alteração de um arquivo à outro. (Ex: touch -r arquivo_referencia arquivo_que_vai_ser_alterado).
+
+--------------------- file = apresenta ao usuário o tipo de arquivo do arquivo que for citado após o comando, a fim de explicar suas propriedades. (Ex: file banana.jpeg).
+
+--------------------- cat (concatenate) = mostra o conteúdo de um arquivo diretamente no terminal. Não é recomendado para arquivos grandes. Ao colocar dois arquivos ou mais depois do comando, é possível mostrar o conteúdo de ambos numa ordem de esquerda para a direita. Ao momento em que um conteúdo for exibido, o outro irá imediatamente aparecer, mas com um ENTER entre os arquivos. (Ex: cat teste1.txt teste2.txt).
+
+Ao usar cat com um > em sequência, você pode criar um novo arquivo, e inserir seu texto logo em sequência. Depois de executar o comando, o seu texto é inserido, e numa nova linha, basta apertar Ctrl + D para salvar e sair. Porém, ao usar cat > num arquivo existente, o arquivo irá ser sobrescrito. (Ex: cat > banana.txt, iria pedir seu texto e depois de dar Ctrl+d, o arquivo banana.txt seria criado com o texto que você inseriu).
+
+A flag "-n" numera todas as linhas do conteúdo do arquivo exibido pelo comando cat. (Ex: cat file1.txt -n).
+
+A flag "-b" numera todas as linhas não vazias do conteúdo do arquivo exibido pelo comando cat. (Ex: cat file2.txt -b).
+
+--------------------- man = disponibiliza um sistema de manual que descreve comandos do linux. (Ex: man cat).
+
+--------------------- less = similarmente com o cat, exibe o conteúdo de um arquivo, porém de maneira paginada, a fim de não carregar todo o conteúdo de um arquivo grande, possibilitando maior fluidez na examinação do conteúdo. Sua diferença com o cat é que ele não cria arquivos, mas sim uma interface para visualizar arquivos já existentes:
+
+Ao abrir a interface, você pode utilizar as setinhas do teclado para navegar linha por linha ou página por página.
+Para ir ao início, basta apertar G, e para ir ao fim, shift + G.
+Para relembrar os comandos da interface do less, basta clicar H.
+
+Uma das funções mais úteis de less é a sua habilidade de procurar texto. Para fazer isso, basta fazer: 
+less search /*insira texto* = pesquisará a partir de onde você está para frente;
+less search ?*insira texto* = pesquisará a partir de onde você está para trás.
+Ao clicar "n", você pulará para a próxima ocorrência do texto pesquisado.
+Ao clicar "shift + n", você pulará para a ocorrência passada do texto pesquisado.
+
+Para sair do less, basta pressionar "q", a fim de sair de sua interface.
+
+--------------------- history = mostra todo o histórico de comandos que você fez naquela sessão shell.
+Com as setas do teclado, é possível alternar entre os comandos que já foram executados na sessão shell, a fim de executá-los novamente. Também é possível de executar o último comando que você já executou apenas digitando !! e clicando ENTER.
+Ctrl + R é o método mais usado e faz a mesma função das setinhas, porém mais eficaz.
+
+A flag "-c" acompanhada de history irá deletar todo o histórico da sua sessão, mas os comandos e outputs continuarão no console, apenas não será possível resgatar o histórico de comandos com nenhum shortcut ou o próprio comando history.
+Também é possível salvar o histórico da sua sessão para um diretório geralmente chamado "~/.bash_history" com a flag history -w
+A flag "-d" com o history pode deletar um comando específico do histórico quando dado o lugar do comando no histórico, para resgatar esse dado, basta mandar history no shell e pegar o número ao lado esquerdo do comando que deseja deletar.
+
+--------------------- clear = limpa a tela do terminal
+
+Ao clicar tab enquanto está digitando um comando, o shell pode presumir o que você está escrevendo e autocompletar para você, se a palavra que você digitou for usada para vários outros comandos, uma lista aparecerá, ou então nada aparece. Clicar tab duas vezes mostra todas as opções.
+
+--------------------- cp (copy) = usado para copiar arquivos e diretórios, sua sintáxe é: cp arquivo_ou_diretorio caminho_desse_arquivo_ou_diretorio (Ex: cp teste1.txt /home/victor/Downloads). Para copiar diretórios, é necessária a flag "-r" logo depois do comando cp para copiar o diretório e todo o seu conteúdo. (Ex: cp -r Downloads/ /home/victor).
+
+Caracteres coringa para cópia em massa:
+* = seleciona qualquer sequência de caracteres (Ex: *.jpg para pegar imagens jpg de um diretório)
+? = seleciona qualquer 1 caractere (Ex: arquivo?, vai achar arquivo1, arquivo2, arquivo3, mas não vai achar arquivo10 ou arquivo11).
+[] = seleciona qualquer caractere incluído nas colchetes, muito útil para casos de letra maiúscula e minúscula (Ex: [Aa]rquivo?? vai achar arquivo1, Arquivo10, arquivo11, Arquivo2, etc).
+
+A flag "-i" impede uma função automática do comando cp que sobrescreve qualquer arquivo e diretório com o mesmo nome sem perguntar. Com essa flag, é possível confirmar manualmente se tais arquivos e diretórios irão ser sobrescritos ou não.
+De maneira contrária, a flag "-f" irá forçar a sobrescrita de qualquer arquivo com o mesmo nome, onde interação do usuário é impossível.
+
+A flag "-p" irá preservar os atributos dos arquivos copiados, ou seja, sua metadata. É útil para situações em que preserver a data de alteração é crítico.
+
+--------------------- mv (move) = Pode ser utilizado para renomear arquivos e diretórios, apenas escrevendo o nome do que deseja renomear, e depois o novo nome do conteúdo selecionado (mv nome_antigo.png nome_novo.png). Uma das outras principais funções de mv é a capacidade de locomover arquivos para outros diretórios, é possível fazer isso escrevendo o nome do arquivo e depois o caminho (mv arquivo.png /home/victor/Downloads/arquivo1). Também é possível transportar dois ou mais arquivos, basta escrever o nome dos arquivos, e no fim, colocar o caminho. (Ex: mv arquivo1.png arquivo2.png arquivo3.png /home/victor).
+
+É possível mudar a ordem da transferência de arquivos para outro diretório, basta utilizar a flag "-t" depois de mv, que permite colocar o caminho, e então o nome dos arquivos que precisam ser transportados para este caminho.
+
+Diferentemente do comando cp, mv pode mover diretórios sem a necessidade de uma flag.
+
+Agora, igual o comando cp, o comando mv irá substituir qualquer arquivo dentro do diretório que tiver o mesmo nome que o arquivo qual está sendo transportado para o diretório será sobrescrito, e assim como o comando cp, há flags para previnir e garantir isso:
+
+A flag "-i" posta depois do comando mv irá fazer o comando perguntar ao usuário se ele deseja sobrescrever os arquivos dentro do diretório com o mesmo nome.
+
+A flag "-b" irá garantir que você irá sobrescrever os arquivos com nome igual no diretório, mas irá criar um backup do arquivo, que geralmente é acompanhado de um sufixo de til (~).
+
+A flag "-v" irá mostrar cada coisa que o comando mv está fazendo, o momento em que ele transfere, sobrescreve ou cria backups no diretório escolhido
+
+--------------------- mkdir (Make Directory) = Permite você a criar diretórios direto do terminal. Você pode criar um único diretório no caminho em que você estiver apenas escrevendo o nome do diretório após escrever o comando mkdir. (Ex: mkdir documentossecretos). Também é possível criar múltiplos apenas escrevendo mais nomes. (Ex: mkdir documentossecretos jogosdasteam).
+
+A flag "-p" colocada após o mkdir permite você a criar subdiretórios simultaneamente dos diretórios pais. (Ex: mkdir -p documentos/livros/terror).
+
+--------------------- rm (remove) = Um comando perigoso que pode apagar arquivos e diretórios. É perigoso pois o Linux não apresenta uma função de lixeira como no Windows, logo é um comando que deve ser tomado com cautela.
+
+A flag "-f" remove protocolos de segurança como, por exemplo, perguntas sobre você querer deletar algum arquivo em específico que haja proteção.
+
+A flag "-i" te pergunta se você quer deletar cada arquivo que esteja sendo deletado, por exemplo, se houverem 3 arquivos sendo deletados, você será questionado sobre querer deletar cada um deles.
+
+A flag "-r" permite o comando rm deletar diretórios e todos os conteúdos neles inclusos.
+
+O comando "rm -rf ..." pode ser muito perigoso por poder deletar diretórios e sem questionar ao usuário se algum arquivo pode ser deletado ou não.
+
+Para deletar diretórios vazios, é possível utilizar o comando rmdir, e inserir o diretório depois.
+
+--------------------- tree = Usado para mostrar todos os diretórios dentro do diretório em que você está, e os seus conteúdos.
+
+--------------------- wc (word count)= Usado para contar todas as letras de um arquivo de texto.
+
+A flag -l irá mostrar a quantidade de linhas em um arquivo, já a flag -w irá mostrar a quantidade de palavras no arquivo.
+
+--------------------- Piping (|) = O caractere | é usado para juntar comandos. Mas em que sentido? Ao escrever um comando e colocar | logo após, e então escrever outro comando, o segundo comando irá obter o primeiro como um input, dando então um output.

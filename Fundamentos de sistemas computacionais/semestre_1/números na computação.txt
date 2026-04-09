@@ -1,0 +1,318 @@
+Números:
+Números naturais: Igual ou maior que zero
+Números negativos: Menores que zero
+Números inteiros: Não são decimais
+Números racionais: Números decimais, com vírgula.
+
+Números decimais:
+Vão de 0 a 9 a A a F, do A a F são representados os números 10 a 15
+Um número decimal pode ser representado por 3 maneiras e as 3 delas são:
+1A 16
+1Ah
+0x1A - sendo essa a usada em programação.
+
+Números em base decimal, binária, octal e hexadecimal:
+Para fazer a conversão de uma base para outra, é essencial que seja decorada estas tabelas:
+
+--------- DECIMAL:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+--------- OCTAL:
+0
+1
+2
+3
+4
+5
+6
+7
+10
+11
+12
+13
+14
+15
+16
+
+--------- HEXADECIMAL:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A 
+B 
+C 
+D 
+E 
+F 
+
+--------- BINÁRIO:
+0000
+0001
+0010
+0011
+0100
+0101
+0110
+0111
+1000
+1001
+1010
+1011
+1100
+1101
+1110
+1111
+
+---------------------Soma de números binários:
+Seguem essa lógica:
+0 + 0 = 0
+0 + 1 = 1 e 1 + 0 = 1
+1 + 1 = 10
+1 + 1 + 1 = 11
+
+Exemplos de soma de números binários:
+
+10110
+00011 +
+-------
+11001
+
+11101
+10010 +
+-------
+101111
+
+10001111
+00000001 +
+----------
+10010000
+
+---------------------Subtração de números binários:
+Seguem essa lógica:
+0 - 0 = 0
+1 - 1 = 0
+1 - 0 = 1
+0 - 1 -> toma emprestado -> 2 - 1 = 1
+
+Exemplos de subtração de números binários:
+
+101101
+010010 -
+--------
+011011
+
+10001011
+00110101 -
+----------
+01010110
+
+101011101
+011100110 -
+-----------
+001110111
+
+---------------------Multiplicação de números binários:
+Seguem essa lógica:
+0 x 0 = 0
+0 x 1 = 0
+1 x 0 = 0
+1 x 1 = 1
+Número maior sempre acima do menor
+
+Exemplos de multiplicação de números binários:
+
+10111
+   10 x
+-------
+ 00000
+10111 +
+-------
+101110
+
+1111
+  11 x
+------
+ 1111
+1111 +
+------
+101101
+
+10001
+  101 x
+-------
+  10001
+ 00000 +
+10001
+-------
+1010101
+
+---------------------Divisão de números binários:
+Exemplos de divisão de números binários:
+__
+10111 |10
+10 -   1011 resultado
+----
+ 011
+  10 -
+  ----
+  011
+   10 -
+   ----
+   01 resto
+
+__
+1111  |11
+11 -   101 resultado
+----
+ 011
+  11 -
+  ----
+   0 resto
+
+____
+10001  |101
+-101    11 resultado
+----
+00111
+- 101
+-----
+  010 resto
+
+---------------------número flutuante em binário:
+
+-------Exemplo: 12,30
+
+12 em binário:
+12 |2
+12  6
+ 0
+
+6 |2
+6  3
+0
+
+3 | 2
+2  1
+1
+
+1 | 2
+1   x
+
+Primeira parte: 1100
+Segunda parte:
+0,30 . 2 = 0,60
+0,60 . 2 = 1,20
+0,20 . 2 = 0,40
+
+,010
+
+Ou seja: 1100,010
+
+---------------------Padrão IEEE 754:
+Sinal, Expoente ajustado e mantissa.
+
+-------Exemplo 1: 2,75
+prim part: 10,
+seg part:
+0,75 x 2 = 1,50
+0,50 x 2 = 1
+
+1,011 . 2¹
+
+-37,50
+
+37 | 2
+36  18
+1
+
+18 | 2
+18  9
+0
+
+9 | 2
+8  4
+1
+
+4 | 2
+2  2
+0
+
+2 | 2
+2  1
+0
+
+1 | 2
+1  x
+
+00100101
+11011010
++      1
+________
+11011011
+
+prim part: 11011011
+seg part:
+0,50 x 2 = 1
+
+11011011,1
+-37,50 em binario: 1,10110111 . 2 ^ 7
+
+127 + 4
+132
+
+132 | 2
+132  66
+0
+
+66 | 2
+66  33
+0
+
+33 | 2
+32  16
+1
+
+16 | 2
+16  8
+0
+
+8  | 2
+8   4
+0
+
+4  | 2
+4   2
+0
+
+2 | 2
+2  1
+0
+
+1 | 2
+1  x
+
+expoente ajustado: 10000100
+
+mantissa: 10110111 (a mesma coisa do que vem depois da vírgula)

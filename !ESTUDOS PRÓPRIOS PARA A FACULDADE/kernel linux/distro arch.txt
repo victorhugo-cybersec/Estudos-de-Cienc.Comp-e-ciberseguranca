@@ -1,0 +1,41 @@
+Para logar, é possível somente escrever "root" e você terá acesso.
+
+No Arch Linux, é necessário particionar o disco e criar 3 partições, uma partição de 1 GB máximo para EFI (partição 1), uma partição que vá valer pelo menos 5% do tamanho total do disco que será o SWAP (partição 3), e o resto do disco para o root (partição 2, representado por: /).
+
+O EFI é usado pelo UEFI para achar e executar o boot de algum sistema operacional que esteja dentro da memória do computador.
+O Swap é usado para backup, quando o tamanho do disco fornecido para o distro é pequeno demais, é recomendado deixar um tamanho considerável para o Swap, a fim de não perder dados. Caso haja uma memória bem grande (18GB para cima), o Swap não é tão usado, mas ainda é recomendado.
+O root é o sistema do computador, é onde haverá todos os arquivos do computador, o bin e o cache.
+
+Para identificar em qual disco você irá particionar o Arch, use o comando "lsblk".
+
+Ao particionar discos, é possível utilizar o comando "fdisk" e depois, o caminho do disco que tem mais espaço (no meu caso, fdisk/dev/sda), e nele, fazer essa ordem de comandos:
+n = cria uma nova partição
+p = define a partição como primária, o que seria o padrão.
+1 (ou 2, ou 3, dependendo de qual partição você estiver criando) = define o número da partição que você está criando. É usado apenas para organização. (O EFI geralmente vem primeiro para ser compatível com versões antigas, também porque é o padrão de instaladores, e por pura organização)
+[ENTER] = define aonde o setor 1 começa, que por padrão é 2048 (por isso o ENTER), e nesse caso, esse 1MB de espaço que fica vazio na verdade tem metadados GPT que basicamente dizem ao sistema como que a partição está organizada, então é necessário que haja esse espaço para o sistema.
+*tamanho da partição que você estiver criando* = define aonde ficará o último setor, nesse caso, é colocado o tamanho desejado da partição.
+w = salva o que você fez.
+
+Setores tem o mesmo valor de 512 bytes e são o que compõe as partições.
+
+Ao criar o sistema de arquivos no root, é necessário formatar o disco do root através do comando:
+# mkfs.ext4 /dev/root_partition
+E para formatar o SWAP:
+# mkswap /dev/swap_partition
+E para formatar o EFI:
+# mkfs.fat -F 32 /dev/efi_system_partition
+
+E então, devemos montar as partições, ou seja, colocar um filesystem para que aquelas partições sejam utilizáveis.
+
+Para o root:
+# mount /dev/root_partition /mnt
+Para o EFI:
+# mkdir -p /mnt/boot
+# mount /dev/efi_system_partition /mnt/boot
+Para o Swap:
+# swapon /dev/swap_partition
+
+Agora, o sistema está pronto para instalar pacotes e bibliotecas.
+É possível usar esse comando para baixar as coisas mais básicas:
+# pacstrap -K /mnt base linux linux-firmware
+

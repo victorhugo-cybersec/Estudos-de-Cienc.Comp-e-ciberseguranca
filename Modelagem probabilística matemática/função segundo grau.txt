@@ -1,0 +1,35 @@
+Para determinar o domínio de uma função:
+
+Funções polinomiais (normais, na minha opinião) (ax² + bx + c):
+- O domínio pertence à todo o conjunto dos números reais (D = R);
+
+Funções racionais (frações) (f(x) = a / x):
+- O denominador não pode ser nulo, logo, é necessário excluír números em que o x possa tornar o dominador em zero.
+Ex: 2/x-2, x não pode ser igual a 2 e pertence ao conjunto real;
+
+Funções com raiz de índice par (f(x) = raizquadrada(x)):
+- O radicando deve ser maior ou igual a zero, ou maior ou igual a algum número que esteja sendo subtraído do x (x >= 0 ou x >= a), ou seja, x pertence ao conjunto real;
+
+Funções com raiz no denominador (f(x) = a / raizquadrada(x)):
+- O radicando deve ser maior do que zero ou maior a algum número que esteja sendo subtraído do x (x > 0 ou x > a), x pertence ao conjunto real;
+
+Funções logarítmicas (f(x) = log a (x)):
+- O logaritmando deve ser maior do que zero (x > 0) e a base deve ser maior do que 0 e diferente de 1;
+
+Para determinar a imagem de uma função:
+Se atente à função, veja como ela funciona, seus sinais e valores, e represente a imagem com um conjunto, assim como o domínio.
+Ex1: f(x) = -|x| - |x|², a imagem é (−∞,0]
+
+O que é um zero da função nas funções de segundo grau?:
+O zero da função são os números que igualam a função à zero. Caso o delta da função for igual a zero, haverá apenas um zero da função, se for positivo, haverá dois zeros da função, e caso seja negativo, não haverá zero da função.
+O zero da função não só representa os números que zeram a função, mas também são os únicos lugares em que a função encosta no eixo X.
+
+Como fazer um gráfico de segundo grau:
+Basta seguir essas etapas:
+1 - Identificar o a, b e c da função (ax² + bx + c)
+2 - Identificar se o "a" é negativo ou positivo. Se for positivo, a parábola será similar à um sorriso, e caso for negativo, será uma face triste
+3 - Calcule o x e o y do vértice (O vértice é a coordenada em que a função atinge antes de inverter seu caminho, seria o ponto mais alto/baixo na parábola) utilizando, para x, a fórmula -b/2a, e para y, -delta/4a.
+4 - Ao calcular o delta, já será possível determinar onde a parábola ficará. Caso o delta seja maior que zero, ele encostará no eixo X e passará dele (terá dois zeros da função), caso o delta seja zero, ele apenas encostará no eixo X (terá um zero da função), e se delta for negativo, ele não encostará no eixo X (não haverá zero da função).
+5 - Agora seria a parte mais chata, onde é necessário fazer a fórmula de bhaskara para obter o x¹ e o x² (se o seu delta deu negativo, não há necessidade de fazer o cálculo, pois a parábola não irá encostar no eixo X.), ao obter os zeros da função, você fará cordenadas com eles: (x¹, 0) e (x², 0).
+6 - E a parte mais fácil, onde basta pegar o c da função, e fazer a coordenada (0, c).
+7 - Pronto, você tem um esboço do gráfico da sua função de segundo grau.

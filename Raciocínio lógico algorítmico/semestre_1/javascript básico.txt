@@ -1,0 +1,51 @@
+1 - Variáveis e funções
+
+- console.log() é uma função que irá imprimir no output do console qualquer informação que estiver nos parênteses, assim como condições, variáveis, etc.
+
+- let define uma variável.
+
+let x = 5;
+
+console.log("Valor inicial : x = ", x);
+
+console.log("Valor inicial : x + 3 = ", x);
+
+- const cria uma constante, ou seja, uma variável não alterável.
+
+const a=3, b=2;
+console.log(a>b);
+
+output: true
+
+--------------------------------------------------------
+
+let altura = parseFloat(prompt("Digite a altura da pessoa em metros:"));
+let pesoIdeal = (72.7 * altura) - 58;
+
+console.log("Altura informada: " + altura + "m.");
+console.log("Peso ideal: " + pesoIdeal + "kg.");
+alert("O peso ideal é: " + pesoIdeal.toFixed(2) + "kg.");
+
+
+--------------------------------------------------------
+
+switch(numero){
+    case 1{
+        console.log(1);
+        break;
+    }
+    case 2{
+        console.log(2);
+        break;
+    }
+    case 3{
+        console.log(3);
+        break;
+    }
+    case 4{
+        console.log(4);
+        break;
+    }
+    default:
+    console.log("numero invalido");
+}
