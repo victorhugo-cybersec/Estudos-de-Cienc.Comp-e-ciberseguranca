@@ -26,7 +26,13 @@
 
 --------Divisibilidade = Na base decimal, é visto que quando um número termina em 0, é possível dividir ele por 10, assim como na base hexadecimal, um número terminado em 0 pode ser dividido por 10 ou 16, e na base binária, divisível por 10.
 
---------Aritmética de múltipla precisão e base octal: Quando um número é muito grande para caber em um tipo normal como int, ele é quebrado em pedaços menores, como um byte, que pode armazenar de valores entre 0 a 255 (2 elevado a 8), isso é aritmética de múltipla precisão. Agora, ao usar o int32 que representa 2 elevado a 32 como base, é possível armazenar de 0 a aproximadamente 4 bilhões.
+--------Aritmética de múltipla precisão e base octal = Quando um número é muito grande para caber em um tipo normal como int, ele é quebrado em pedaços menores, como um byte, que pode armazenar de valores entre 0 a 255 (2 elevado a 8), isso é aritmética de múltipla precisão. Agora, ao usar o int32 que representa 2 elevado a 32 como base, é possível armazenar de 0 a aproximadamente 4 bilhões.
+
+--------GCC = Significa GNU Compiler Collection, é um conjunto de compiladores de open-source que foi criado nos anos 80, sendo o compilador padrão de praticamente todos os distros do kernel Linux. No Linux, é utilizado para converter código em C ou C++ em um executável (.exe/.elf).
+
+--------AT&T (GCC AT&T) = Nos anos 70, os laboratórios da empresa de telefonia AT&T (Bell Labs) criaram o sistema operacional Unix e a linguagem C. Lá, criaram um estilo próprio de escrever código Assembly, que funcionava para os processadores Intel, e outras marcas de chips da época. Nessa sintáxe do GCC, o MOV usa a ordem MOV ORIGEM, DESTINO, registradores usam % no início, por exemplo: %eax, números hexadecimais usam $0x no início, ao acessar memória, é utilizado dessa maneira:
+
+--Exemplo: [esp + 4] ficaria 4(%esp)
 
 --------Ao criar uma função que não retorna nada, ela fica representada assim em Assembly:
 
@@ -177,14 +183,15 @@ var_10  = dword ptr -10h
         retn
 main    endp
 
---------AND no GCC = É um "molde" (máscara de bits) para filtrar o endereço do dado que está no registrador que estiver sendo usado. Aonde estiver 1s, o dado passa, e aonde estiver 0s, o dado é convertido em zeros. Caso haja um dado de 12 bits: 111000110111 no registrador ESP, ao moldar esse dado para preservar os primeiros 6 bits e descartar o resto (transformar em 0), seria feito: "and esp, 0FC0h", logo o dado ficaria: 111000000000. Essa instrução é feita a fim de facilitar ao processador de interpretar o endereço daquele dado no registrador, o tornando um múltiplo de 4, permitindo com que ele puxe o dado em 1 ciclo de viagem.
+--------AND no GCC = É um "molde" (máscara de bits) para filtrar o endereço do dado que está no registrador que estiver sendo usado. Aonde estiver 1s, o dado passa, e aonde estiver 0s, o dado é convertido em zeros. Caso haja um endereço de 12 bits: 111000110111 no registrador ESP, ao moldar esse endereço para preservar os primeiros 6 bits e descartar o resto (transformar em 0), seria feito: "and esp, 0FC0h", logo o endereço ficaria: 111000000000. Essa instrução é feita a fim de facilitar ao processador de interpretar o endereço daquele dado no registrador, o tornando um múltiplo de 4, permitindo com que ele puxe o endereço do dado em 1 ciclo de viagem.
 
 O resultado é quase o mesmo, o endereço da string é guardado no registrador EAX, e então salvo no stack frame. Além disso, o comando AND ESP, 0FFFFFFF0h alinha o endereço do valor no registrador ESP em um limite de 16 bytes, devido à eficiência do processador com alinhamento a múltiplos de 4.
 
 O comando SUB ESP, 10h aloca 16 bytes no stack frame para manter o padrão do limite de 16 bytes, mesmo que apenas 4 bytes sejam necessários nessa situação. E depois a função printf() é chamada, assim que a string é alocada no ESP.
 
+Na linha de MOV que vem logo após o SUB ESP, 10h, e a linha que coloca a string "hello world\n" no stack, vemos uma soma dentro de colchetes. O programa, nessa linha, basicamente pega o que estiver no EAX e joga para o esp +0, pois a var_10 é igual a -10h, e ao somar +10h com -10h, resulta em 0, e seria possível deixar mais direto ao ponto usando o 0, mas essa soma é feita para facilitar a vida de quem observa milhares de linhas de código Assembly (futuramente você, leitor, e eu também), utilizando de variáveis para demonstrar mais facilmente o que está sendo feito. O esp está em colchetes, pois o programa quer mostrar ao computador que este valor está na memória RAM, e não na CPU, e que esse valor não pode ser alterado.
+
 Diferentemente do MSVC, o GCC usa MOV, ao invés de XOR que é usado no MSVC, quando ambos estão sem otimização ligada.
 
 O comando leave faz automaticamente a função de retornar o ESP e o EBP para o início.
 
-Na linha de MOV que vem logo após o SUB ESP, 10h, vemos uma soma dentro de colchetes. O programa, nessa linha, basicamente pega o que estiver no EAX e joga para o esp +0, pois a var_10 é igual a -10h, e ao somar +10h com -10h, resulta em 0. O esp está em colchetes, pois o programa quer mostrar ao computador que este valor está na memória RAM, e não na CPU.
