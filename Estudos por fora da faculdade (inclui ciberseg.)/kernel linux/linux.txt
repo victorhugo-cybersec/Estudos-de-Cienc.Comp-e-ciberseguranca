@@ -1,5 +1,25 @@
 ------------------------------------------- linux: comandos básicos de comunicação com o shell
 
+--------------------- flags = flags começam com um hífen, e então a palavra/letra da flag, é sempre citado após o comando no qual ela é utilizada, cada comando tem suas flags específicas, e cada uma delas vão ter funções diferentes para o comando, em alguns comandos, uma flag é necessária, em outras, é uma maneira de apenas filtrar, ou até mesmo restringir, dar permissão, e etc. Dois comandos diferentes podem ter o mesmo nome de uma flag, mas essas flags vão ter usos diferentes e não podem ser confundidas (Ex: touch -r, e ls -r).
+
+--------------------- wildcards = São usados geralmente para filtrar ou se referir à uma variedade de arquivos, diretórios, entre outros. São essenciais para a vida de alguém que vá mexer com linux no emprego. Os wildcards são esses:
+
+---------- ? = Se refere a todos os caracteres em 1 unidade.
+
+----- Exemplo: arquivo?, vai achar arquivo1, arquivo2, arquivo3, mas não vai achar arquivo10 ou arquivo11
+
+---------- * = Usado para se referir a qualquer e qualquer quantidade de caracteres, até mesmo nenhum caractere.
+
+----- Exemplo: ao pesquisar por *.txt, você vai ter como retorno todos, literalmente todos os arquivos de formato .txt no lugar em que você estiver pesquisando.
+
+---------- [] = Especifica o que você quer procurar, é bom para pesquisar arquivos numerados, pesquisar em ordem alfabética, etc.
+
+----- Exemplo: Você quer pesquisar pelos arquivos file2, file3 e file4, para isso, você pode usar o parâmetro file[2-4], ou então file[234] que é maior. Também é possível fazer file[2-48-9] por exemplo.
+
+---------- [!] = É a forma de mostrar ao shell o que você NÃO quer que apareça, com o mesmo estilo dos braquetes.
+
+----- Exemplo: Ao pesquisar por arquivos, você não deseja ver do arquivo 9 porque você já o olhou anteriormente. Ao pesquisar por esses arquivos, você pode usar file[!9]
+
 --------------------- echo = imprime no console o que você digitar após escrever echo.
 --------------------- pwd (print working directory) = imprime o caminho em que você está, começando do root (/).
 
@@ -28,13 +48,15 @@ a flag "-r" lista os arquivos e diretórios em ordem alfabética reversa, é út
 
 para combinar flags, basta colocar de qualquer ordem a letra da flag junto com a outra antes do hífen. (Ex: ls .. lar).
 
+--------------------- find = Com o uso de flags, é possível encontrar qualquer arquivo/diretório com esse comando desde que você saiba o nome ou o tipo dele (Ex: "find -name passwords.txt" ou "find -name "*.txt"").
+
 --------------------- touch = Seu propósito é alterar o horário e dia em que algum arquivo foi atualizado, ou seja, literalmente tocar aquele arquivo, mostrar que alguém mexeu nele, mas pode também, e é comumente usado para criar novos arquivos com um nome que ainda não exista. Também é possível criar vários arquivos simultaneamente, basta escrever um em sequência do outro com um espaço em branco. (Ex: touch anotacoes.txt rotina.txt (irá criar um arquivo .txt com o nome anotacoes e um arquivo .txt com o nome rotina no caminho em que você estiver)).
 
 a flag "-r" é utilizada para igualar a data de alteração de um arquivo à outro. (Ex: touch -r arquivo_referencia arquivo_que_vai_ser_alterado).
 
 --------------------- file = apresenta ao usuário o tipo de arquivo do arquivo que for citado após o comando, a fim de explicar suas propriedades. (Ex: file banana.jpeg).
 
---------------------- cat (concatenate) = mostra o conteúdo de um arquivo diretamente no terminal. Não é recomendado para arquivos grandes. Ao colocar dois arquivos ou mais depois do comando, é possível mostrar o conteúdo de ambos numa ordem de esquerda para a direita. Ao momento em que um conteúdo for exibido, o outro irá imediatamente aparecer, mas com um ENTER entre os arquivos. (Ex: cat teste1.txt teste2.txt).
+--------------------- cat (concatenate) = mostra o conteúdo de um arquivo diretamente no terminal. Não é recomendado para arquivos grandes. Ao colocar dois arquivos ou mais depois do comando, é possível mostrar o conteúdo de ambos numa ordem de esquerda para a direita. Ao momento em que um conteúdo for exibido, o outro irá imediatamente aparecer. (Ex: cat teste1.txt teste2.txt).
 
 Ao usar cat com um > em sequência, você pode criar um novo arquivo, e inserir seu texto logo em sequência. Depois de executar o comando, o seu texto é inserido, e numa nova linha, basta apertar Ctrl + D para salvar e sair. Porém, ao usar cat > num arquivo existente, o arquivo irá ser sobrescrito. (Ex: cat > banana.txt, iria pedir seu texto e depois de dar Ctrl+d, o arquivo banana.txt seria criado com o texto que você inseriu).
 
@@ -71,11 +93,6 @@ A flag "-d" com o history pode deletar um comando específico do histórico quan
 Ao clicar tab enquanto está digitando um comando, o shell pode presumir o que você está escrevendo e autocompletar para você, se a palavra que você digitou for usada para vários outros comandos, uma lista aparecerá, ou então nada aparece. Clicar tab duas vezes mostra todas as opções.
 
 --------------------- cp (copy) = usado para copiar arquivos e diretórios, sua sintáxe é: cp arquivo_ou_diretorio caminho_desse_arquivo_ou_diretorio (Ex: cp teste1.txt /home/victor/Downloads). Para copiar diretórios, é necessária a flag "-r" logo depois do comando cp para copiar o diretório e todo o seu conteúdo. (Ex: cp -r Downloads/ /home/victor).
-
-Caracteres coringa para cópia em massa:
-* = seleciona qualquer sequência de caracteres (Ex: *.jpg para pegar imagens jpg de um diretório)
-? = seleciona qualquer 1 caractere (Ex: arquivo?, vai achar arquivo1, arquivo2, arquivo3, mas não vai achar arquivo10 ou arquivo11).
-[] = seleciona qualquer caractere incluído nas colchetes, muito útil para casos de letra maiúscula e minúscula (Ex: [Aa]rquivo?? vai achar arquivo1, Arquivo10, arquivo11, Arquivo2, etc).
 
 A flag "-i" impede uma função automática do comando cp que sobrescreve qualquer arquivo e diretório com o mesmo nome sem perguntar. Com essa flag, é possível confirmar manualmente se tais arquivos e diretórios irão ser sobrescritos ou não.
 De maneira contrária, a flag "-f" irá forçar a sobrescrita de qualquer arquivo com o mesmo nome, onde interação do usuário é impossível.
@@ -119,3 +136,5 @@ Para deletar diretórios vazios, é possível utilizar o comando rmdir, e inseri
 A flag -l irá mostrar a quantidade de linhas em um arquivo, já a flag -w irá mostrar a quantidade de palavras no arquivo.
 
 --------------------- Piping (|) = O caractere | é usado para juntar comandos. Mas em que sentido? Ao escrever um comando e colocar | logo após, e então escrever outro comando, o segundo comando irá obter o primeiro como um input, dando então um output.
+
+--------------------- grep = esse comando pode pesquisar por qualquer coisa que seja inserida dentro de aspas (""),  e logo após, o arquivo em que será pesquisado o que foi inserido (Ex: grep "ERROR" error.log). Com a flag -R, é possível procurar dentro de vários arquivos em um diretório em específico (Ex: grep "banana" /frutas/).

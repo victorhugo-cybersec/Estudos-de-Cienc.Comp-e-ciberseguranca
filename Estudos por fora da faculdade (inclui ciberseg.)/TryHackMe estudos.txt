@@ -1,0 +1,3 @@
+Sites recomendados pela plataforma:
+https://www.shodan.io/
+https://www.virustotal.com/gui/home/upload
