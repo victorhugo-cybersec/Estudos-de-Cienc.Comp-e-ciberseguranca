@@ -1,0 +1,63 @@
+
+Essa anotação também vale para o diretório "/Estudos por fora da faculdade (inclui ciberseg.)/prog. competitiva"
+
+
+------------------ Ao trocar variáveis, há vários métodos possíveis. Aqui são alguns métodos possíveis no JavaScript:
+
+------------------ 1 - Deconstructing:
+
+let a;
+let b;
+[a, b] = [1, 2];
+
+--------- Após esse código, "a" será igual a 1, e "b" será igual a 2.
+
+--------- Logo, seguindo essa lógica, para trocar "a" e "b" de lugar, é possível fazer isso:
+
+let a = 1;
+let b = 0;
+
+[a, b] = [b, a];
+
+console.log(a + " " + b); \\ imprime "0 1".
+
+--------- Todos os valores restantes após o símbolo de igual irão ser colocados como o valor resultante à última variável citada antes do símbolo de igual. Aqui vai um exemplo (Exemplo do site: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring):
+
+let a, b, rest;
+[a, b] = [10, 20];
+
+console.log(a);
+// Expected output: 10
+
+console.log(b);
+// Expected output: 20
+
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+
+console.log(rest);
+// Expected output: Array [30, 40, 50]
+
+------------------ 2 - Valor temporário:
+
+let a = 2;
+let b = 4;
+let temp = 0;
+
+temp = a;
+a = b;
+b = temp;
+
+--------- Basicamente o valor do "a" é enviado para uma variável temporária "temp", e então "a" tem seu valor igualado ao valor de "b", e então "b" é igualado ao valor de "temp".
+
+------------------ 3 - Soma e subtração:
+
+--------- Funciona somente com números inteiros, e somente esse tipo de variável.
+
+let a = 2;
+let b = 4;
+
+a = a + b;
+b = a - b;
+a = a - b;
+
+--------- Aqui, de maneira lógica, "a" se torna "ab", e então o valor de "b" se torna a diferença entre "ab" e "b", sobrando "a" e então igualando o valor de "b" ao valor antigo de "a", e então "a" tem seu valor igualado à diferença de "ab" e "a"(que seria o valor atual de b), o que resulta em "a" tendo seu valor igualado a "b".
