@@ -1,3 +1,5 @@
+--------------------------------------------- INCOMPLETO!!!!!!!!!!!!!!!!
+
 1 - 1 Quantidades digitais e analógicas
 Circúitos eletrônicos podem ser divididos em duas categorias, digital e analógico.
 Enquanto os circúitos analógicos são contínuos e assumem qualquer valor, os digitais assumem valores discretos que são o 0 e o 1.

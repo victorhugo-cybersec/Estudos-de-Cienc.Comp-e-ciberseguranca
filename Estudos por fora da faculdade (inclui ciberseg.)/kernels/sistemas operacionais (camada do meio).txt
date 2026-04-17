@@ -1,0 +1,7 @@
+--------------------Definições de conceitos de Sistemas Operacionais (SOs).
+
+---------------Sistemas de arquivos
+
+----------Falar sobre NTFS, ext4, etc.
+
+----------Falar sobre Program IDs e sobre PID 1 (Init Systems (sistema V antigo, upstart, systemd, etc)).
