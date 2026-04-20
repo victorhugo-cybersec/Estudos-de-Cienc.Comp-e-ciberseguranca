@@ -1,14 +1,89 @@
+Essa anotação usará os números dos capítulos que foram lidos e anotados dentro da própria documentação do MySQL. Acesse dev.mysql.com se deseja olhar mais a fundo.
+
 --------------------Os programas do MySQL
 
 ---------------O que é o MySQL?
 
 ----------O MySQL é um pacote de ferramentas de linha de comando trabalhando juntas, essas ferramentas são divididas em categorias pela própria documentação do MySQL.
 
+--------------------6.1 Visão Geral de Programas MySQL
+
+-----"--help" = uma flag que pode ser utilizada para entender como uma ferramenta pode ser usada. Tem em maioria das ferramentas, como o comando "mysql".
+
 -----mysqld = mysqld (MySQL Daemon, ou seja, o servidor MySQL) é essencial de estar rodando para utilizar de ferramentas cliente, pois os clientes ganham acesso aos bancos de dados conectando pelo servidor.
 
------mysqld_safe = É usado em sistemas operacionais (SOs) antigos que usam do sistema V (um sistema que determina o que será executado a cada estado do computador, seja desligando, ligado, reiniciando, etc), ele é executado para iniciar o servidor MySQL desejado, e continua sendo executado de fundo, a fim de tentar rodar o servidor novamente se ele cair.
+-----mysqld_safe = É um script gerenciador, ele é executado para iniciar o servidor MySQL desejado, e continua sendo executado de fundo, a fim de tentar rodar o servidor novamente se ele cair.
 
------mysql.server = É considerado como um motor de partida para iniciar o mysqld (o servidor). Um script utilizado somente em SOs antigos que usam o sistema V, esse script rodaria no momento em que o computador ligasse, e ele puxa o mysqld_safe para ser executado após observar algumas configurações básicas e então se encerra. Resumidamente uma maneira de executar o servidor MySQL a partir do momento em que o computador for ligado nesses SOs mais antigos que não utilizam systemd (um sistema de inicialização para SOs que, no contexto do MySQL, já faz a função de ambos o mysql.server e o mysqld_safe).
+-----mysql.server = É considerado como um motor de partida para iniciar o mysqld (o servidor). Um script utilizado somente em SOs antigos que usam o sistema V (um sistema que determina o que será executado a cada estado do computador, seja desligando, ligado, reiniciando, etc), esse script rodaria no momento em que o computador ligasse, e ele puxa o mysqld_safe para ser executado após observar algumas configurações básicas e então se encerra. Resumidamente uma maneira de executar o servidor MySQL a partir do momento em que o computador for ligado nesses SOs mais antigos que não utilizam systemd (um sistema de inicialização para SOs que, no contexto do MySQL, já faz a função de ambos o mysql.server e o mysqld_safe).
 
 -----mysqld_multi = Um script usado para situações específicas onde é desejado rodar mais de um servidor MySQL que estejam em portas TCP/IP e diferentes arquivos .sock Unix, e para cada um deles, é aberto o mysqld_safe, e cada servidor vai ter sua instância mysqld_safe aberta e rodando para previnir caídas do servidor.
 
+----------Comandos (programas clientes) usados no MySQL:
+
+-----mysql = Ferramenta de linha de comando utilizada pelo programa MySQL para receber comandos SQL ou executá-los de um arquivo no modo batch (de lote, ou seja, execução rápida, otimizada e automática, sem interação humana e com um output "feio", na intenção de ser eficiente).
+
+-----mysqladmin = cliente que performa operações administrativas, como criar ou deletar bancos de dados, recarregar tabelas e mandar tabelas para o disco, reabrir arquivos log. Também pode ser usado para obter a versão, processo e informação de status do servidor.
+
+-----mysqlcheck = um cliente que faz manutenção de tabelas, que observa, repara, analiza e otimiza tabelas.
+
+-----mysqldump = cliente que transforma um banco de dados MySQL em um arquivo SQL, de texto, ou XML.
+
+-----mysqlimport = cliente que faz, de maneira não literal, o inverso do cliente mysqldump, importando arquivos de texto em suas tabelas respectivas usando LOAD DATA.
+
+-----mysqlsh = é um cliente avançado, um editor de código para o servidor MySQL, assim como o cliente mysql, ele provide a capacidade de criar scripts em javascript e python, e inclui APIs para trabalhar com MySQL.
+
+-----mysqlshow = cliente que mostra informações sobre bancos de dados, tabelas, colunas e índices.
+
+-----mysqlslap = cliente feito para emular carregamento cliente de um servidor MySQL, reportando o tempo de cada estágio. Funciona como se múltiplos clientes estivessem acessando o servidor.
+
+-----Há vários outros comandos, mas nem todos são necessários de serem decorados ou anotados, quando for necessário alguma ferramenta que faça algo em específico, basta eu (você também) pesquisar.
+
+--------------------Chapter 5 Tutorial
+
+----------5.1 Conectando e desconectando do servidor.
+
+-----Para conectar ao servidor, geralmente é necessário prover um nome de usuário MySQL ao usar "mysql", e muito provavelmente uma senha. Se o servidor roda numa máquina que não seja a que você está logando, é também necessário prover um nome de host. Ao saber tais parâmetros, é possível conectar assim: "mysql -h host -u user -p" (isso é uma template, não é necessário a parte do -h host caso o MySQL já estiver na máquina na qual você está usando. Ao usar a flag -p, não se coloca a senha depois, é necessário aparecer uma zona de input escrita "Enter password:" a fim de esconder a sua senha visualmente. Caso o MySQL na sua máquina permita isso, você pode entrar de maneira anônima no banco de dados, usando apenas "mysql").
+
+-----Assim que o log-in dê certo, vai aparecer algo como mysql>, onde você poderá começar a criar e deletar tabelas e bancos de dados do jeito que quiser.
+
+-----Para sair do log-in, basta digitar QUIT e dar enter, ou usar Ctrl + D caso o seu sistema seja Unix.
+
+----------5.2 Colocando Queries
+
+-----Ao entrar no servidor, você não estará em nenhum banco de dados, é como você estivesse no root do sistema e ainda precisasse realizar comandos para acessar um diretório, mas nesse caso, um banco de dados. No momento a documentação prefere não mostrar diretamente sobre a criação de banco de dados, a fim de dar um passo atrás do outro primeiramente.
+
+-----É possível usar este comando para verificar a versão do seu MySQL: "SELECT VERSION(), CURRENT_DATE;"
+
+-----É visto que há a necessidade de colocar um ; no final das queries (Exceto em algumas, como o QUIT, por exemplo), e que, bom, quase tudo é em Caps Lock ativado, o que não é necessariamente algo para fazer o SQL funcionar, mas sim uma regra não escrita pelos usuarios de SQL, pois com letras maiúsculas para comandos e minúsculas para argumentos e outras coisas que serão estudadas futuramente, o código fica melhor de ser lido.
+
+-----Assim como um shell comum, ao enviar as queries, o mysql executa a query e então mostra novamente "mysql>" pronto para receber novas queries. Seus outputs quase sempre serão em formato de tabela (colunas e linhas) e a primeira linha sempre será o nome das colunas que você coleta de tabelas de bancos de dados. Se você resgatar o valor de uma expressão ao invés de uma coluna de uma tabela (como no exemplo visto), o mysql nomeia a coluna usando a expressão em si.
+
+-----Como um dos focos do MySQL é ser otimizado, ele mostra quantas linhas foram retornadas e quão longo demorou para a query ser executada, o que dá uma noção básica da performance do servidor. Os valores são imprecisos por representarem o tempo de um relógio literal, e não da CPU ou da máquina, além de serem afetados por carregamento de server e a latência da rede.
+
+-----O MySQL pode ser utilizado como uma calculadora também, ao ser usado esse query, por exemplo: "SELECT (20+4)/32;".
+
+-----É possível fazer mais de uma linha de comando, apenas se oportunando do ; que representa o fim de uma linha de query (Exemplo: "SELECT VERSION(); SELECT NOW();").
+
+-----As queries não precisam ser feitas em 1 única linha. É possível estender a query para várias linhas apenas dando enter antes de terminar o comando com ponto e vírgula.
+
+Exemplo:
+SELECT
+VERSION()
+,
+NOW()
+;
+
+Ao fazer isso, o mysql> se torna -> a cada linha nova, a fim de mostrar ao usuário que a query não foi fechada. Na verdade, há muitas maneiras que o MySQL usa para se comunicar com o usuário do programa através do prompt:
+
+mysql> = Pronto para uma nova query.
+-> = Esperando a próxima linha da query de múltiplas linhas.
+
+'> = Esperando pela próxima linha, esperando o usuário fechar a string que começou com uma única aspa '. Nesse caso, basta utilizar '\c, o que é interpretado pelo SQL como um caractere, fechando a string.
+
+"> = Quase a mesma coisa de '>. Está esperando pela próxima linha, mas esperando também o usuário fechar a string que começou com aspas duplas ". Nesse caso, basta utilizar "\c, o que é interpretado pelo SQL como um caractere, fechando a string.
+
+`> = Esperando pela próxima linha, esperando o usuário fechar um identificador que começou com um acento grave `. Nesse caso, basta utilizar `\c, o que é interpretado pelo SQL como um caractere, fechando a string.
+
+/*> = Esperando pela próxima linha, esperando o usuário fechar o comentário que começou com /*.
+
+----------5.3 Criando e usando um banco de dados.
