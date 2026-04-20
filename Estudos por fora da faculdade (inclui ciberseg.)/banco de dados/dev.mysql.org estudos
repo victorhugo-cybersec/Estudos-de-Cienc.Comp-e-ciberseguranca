@@ -11,3 +11,4 @@
 -----mysql.server = É considerado como um motor de partida para iniciar o mysqld (o servidor). Um script utilizado somente em SOs antigos que usam o sistema V, esse script rodaria no momento em que o computador ligasse, e ele puxa o mysqld_safe para ser executado após observar algumas configurações básicas e então se encerra. Resumidamente uma maneira de executar o servidor MySQL a partir do momento em que o computador for ligado nesses SOs mais antigos que não utilizam systemd (um sistema de inicialização para SOs que, no contexto do MySQL, já faz a função de ambos o mysql.server e o mysqld_safe).
 
 -----mysqld_multi = Um script usado para situações específicas onde é desejado rodar mais de um servidor MySQL que estejam em portas TCP/IP e diferentes arquivos .sock Unix, e para cada um deles, é aberto o mysqld_safe, e cada servidor vai ter sua instância mysqld_safe aberta e rodando para previnir caídas do servidor.
+
