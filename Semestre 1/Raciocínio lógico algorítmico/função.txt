@@ -1,0 +1,43 @@
+Funções são maneiras de definir uma ação em algo similar a uma variável (a própria função), o que permite facilitar na hora em que é necessário realizar um cálculo ou uma ação em específico repetidas vezes no código. Elas podem receber parâmetros a fim de se ajustar à situações específicas, e podem retornar valores, ou não.
+
+Exemplo1:
+function square(num){
+
+    return n1 * n1;
+
+}
+
+echo (square(2));
+
+Nesse código, ao chamar a função, devemos dar o parâmetro necessário para ela funcionar.
+Neste caso, é necessário dar um valor à função que vá ser elevado a 2.
+A função não faz nada como dar echo por conta própria, pois nesse caso ela retorna um valor, então no momento em que escrevemos square(2), estamos resumidamente falando do número inteiro 4 (pois 2 ** 2 == 4). Logo, se a função apenas for chamada, nada ocorrerá, o que nos exige dar um echo na função, a fim de mostrar o valor resultante dessa função.
+
+Variáveis definidas por fora de uma função são globais, mas variáveis definidas por dentro de uma função são locais, pois serão criadas e utilizadas somente por dentro da função.
+
+Exercício 1:
+
+function average3(x, y, z){
+
+    return (x + y + z) / 3;
+
+}
+
+Uma função que retorna a média de qualquer quantia de números, por meio de array:
+
+function averageIndef(x){
+
+    let temp = 0;
+
+    for(let i = 0; i < x.length; i++) {
+
+        temp += x[i];
+
+    }
+
+    return temp / x.length;
+
+}
+
+console.log(averageIndef([20, 40, 10, 100, 2000, 10]));
+

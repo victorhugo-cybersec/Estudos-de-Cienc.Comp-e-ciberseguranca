@@ -52,7 +52,7 @@ Essa anotação usará os números dos capítulos que foram lidos e anotados den
 
 -----Ao entrar no servidor, você não estará em nenhum banco de dados, é como você estivesse no root do sistema e ainda precisasse realizar comandos para acessar um diretório, mas nesse caso, um banco de dados. No momento a documentação prefere não mostrar diretamente sobre a criação de banco de dados, a fim de dar um passo atrás do outro primeiramente.
 
------É possível usar este comando para verificar a versão do seu MySQL: "SELECT VERSION(), CURRENT_DATE;"
+-----É possível usar este query para verificar a versão do seu MySQL: "SELECT VERSION(), CURRENT_DATE;"
 
 -----É visto que há a necessidade de colocar um ; no final das queries (Exceto em algumas, como o QUIT, por exemplo), e que, bom, quase tudo é em Caps Lock ativado, o que não é necessariamente algo para fazer o SQL funcionar, mas sim uma regra não escrita pelos usuarios de SQL, pois com letras maiúsculas para comandos e minúsculas para argumentos e outras coisas que serão estudadas futuramente, o código fica melhor de ser lido.
 
@@ -87,3 +87,61 @@ mysql> = Pronto para uma nova query.
 /*> = Esperando pela próxima linha, esperando o usuário fechar o comentário que começou com /*.
 
 ----------5.3 Criando e usando um banco de dados.
+
+-----SHOW DATABASES; =
+
+Para exibir bancos de dados, é possível utilizar a query "SHOW DATABASES;". É importante falar que essa query pode mostrar bancos de dados variados dependendo das suas permissões. Caso você não tenha a permissão de "SHOW DATABASES", você não irá ter acesso a poder ver alguns bancos de dados.
+
+-----USE *banco de dados* = 
+
+A instrução "USE" (não é uma query por não consultar ou alterar dados diretamente) deve ser usado em uma linha e não necessita de ponto e vírgula no final. Ele é usado para entrar em um banco de dados, então, caso haja por exemplo, um banco de dados chamado teste, é possível entrar nele usando a query: "USE TEST".
+
+-----CREATE DATABASE *nome do banco*; = 
+
+Para criar um banco de dados, você pode usar o comando "CREATE DATABASE" e depois o nome do banco de dados que vai ser criado. É importante saber que nomes de bancos de dados são case-sensitive em sistemas Unix (Letras maiúsculas e minúsculas tem diferença). Para o Windows, ainda assim é recomendada a prática de usar letras maiúsculas e minúsculas de acordo com o nome do banco de dados qual referenciado.
+
+Ao criar um banco de dados, você não entra automaticamente nele. Logo, é bom usar o comando "USE", assim como todas as vezes que você começar uma sessão mysql, é necessário entrar no banco novamente.
+
+-----SHOW TABLES; =
+
+Com esse comando, é possível ver as tabelas existentes no banco de dados em que você estiver.
+
+-----Na documentação, é explicado que a parte mais difícil de criar uma tabela é a parte de definir as colunas e linhas, tendo em mente que é necessário dar dados que não precisam ser manualmente alterados, e que sejam relevantes.
+
+-----É dado um exemplo de um banco de dados que armazena informações de pets, e em uma das colunas, é armazenado um dado de dia de nascença, o MySQL provide cálculos com dias, então com o dia de nascimento do pet, é possível calcular automaticamente a idade do pet e não haverá a necessidade de colocar uma coluna de idade onde é necessária ser alterada a cada ano que se passa. Ao criar a tabela de pets, foi usada essa query:
+
+CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
+        species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+
+-----CREATE TABLE *dados*; = Um comando usado para criar tabelas dentro de um banco de dados.
+
+No exemplo acima, vemos o nome da tabela que está sendo criada, e logo após, um parênteses é aberto, nele são dadas informações sobre o nome das colunas e o conteúdo que pode ser incluido nelas.
+O "name VARCHAR(20)" cria uma coluna de nome "name" que pode receber um texto de no máximo 20 caracteres.
+"owner VARCHAR(20)" é o mesmo conceito da coluna "name", mas com nome diferente.
+"species VARCHAR(20)" a mesma coisa das colunas "owner" e "name", mas com nome diferente.
+"sex CHAR(1)" cria uma coluna com nome "sex" e que só aceita um caractere de texto, que nesse contexto deveria receber ou a letra F ou a letra M.
+"birth DATE" cria uma coluna chamada birth que pode receber um dia como dado, é aonde o dia de aniversário é inserido, e cálculos podem ser feitos de acordo com o dia atual. É importante dizer que o MySQL lê datas com essa template: YYYY-MM-DD, ou seja, ano, mês e dia, respectivamente.
+"death DATE" é a mesma coisa da coluna "birth", mas pode receber valor nulo caso o pet esteja vivo, logicamente.
+
+-----DESCRIBE *tabela*; = Exibe a estrutura da tabela que for citada.
+O resultado do comando "DESCRIBE" com a tabela do exemplo lá de cima dá nisso:
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(20) | YES  |     | NULL    |       |
+| owner   | varchar(20) | YES  |     | NULL    |       |
+| species | varchar(20) | YES  |     | NULL    |       |
+| sex     | char(1)     | YES  |     | NULL    |       |
+| birth   | date        | YES  |     | NULL    |       |
+| death   | date        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+É possível ver que há colunas com valores e nomes diferentes, isso vai ser aprofundado futuramente.
+
+----------5.3.3 Carregando dados numa tabela.
+
+-----Utilizando ainda o exemplo da tabela de pets citada anteriormente, para "popular" uma tabela vazia, geralmente é usado um arquivo .txt com todas as linhas de comando usadas para criar várias instâncias na tabela. Algo interessante é que, com o comando que já será explicado, "LOAD", é possível fazer um arquivo .txt apenas com os dados nos lugares respectivos de cada coluna e um tab separando cada dado, e na hora de deixar um valor nulo, é usado o \N, o que resulta em algo mais ou menos assim dentro do arquivo:
+
+Whistler        Gwen    bird    \N      1997-12-09      \N
+(name)          (owner) (species,sex)   (birth)         (death)
