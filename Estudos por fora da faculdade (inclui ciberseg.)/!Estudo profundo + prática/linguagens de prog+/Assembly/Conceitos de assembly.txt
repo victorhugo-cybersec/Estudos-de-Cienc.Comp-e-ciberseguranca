@@ -1,0 +1,39 @@
+----------------1.Conceitos teóricos:
+
+--------Arquitetura de conjunto de instruções (ISA) = Todo CPU tem suas próprias instruções para mover dados entre registradores, trabalhar com memória, e realizar operações aritméticas primitivas.
+
+--------Código de máquina = Código que a CPU processa diretamente. Toda instrução é geralmente codificada por vários bytes.
+
+--------Linguagem Assembly = Feito pra facilitar a vida do programador em ler código de máquina.
+
+--------Flow de execução = É a ordem em que as instruções de um programa são executadas pela CPU. Ao mudar o flow de execução de lugar, você está mudando o endereço para qual a CPU vai continuar lendo aquelas instruções, seja num endereço acima ou abaixo.
+
+--------Caller = O endereço no qual uma função for chamada, se chama caller. Esse endereço é retomado no final das funções, a fim de retornar à onde o código havia parado.
+
+--------Registradores de CPU = São o RAM do CPU, basicamente utilizados para não ter que ir até o RAM e armazenar e resgatar informações de lá, tendo em consideração eficiência. Um registrador de CPU pode ter uma memória pequena, utilizada apenas para guardar informações que estão sendo usadas durante o processamento.
+
+--------Assembler e linker = O assembler (montador) traduz código em linguagem assembly para código de máquina, que seria o binário, criando um arquivo objeto. O linker (ligador) pega um ou mais arquivos objeto criados e os junta, a fim de criar um único arquivo executável final. Ou seja, o assembler traduz para a máquina o código escrito em assembly para binário, e o linker organiza e conecta o código num todo.
+
+--------Stack (pilha) = O stack é uma região de memória que é usada para gerenciar a execução de funções, armazenar variáveis locais e endereços de retorno. O stack fica dentro do RAM, porém em muitas vezes, dados do stack acabam ficando no cache quando estão sendo usados, o que permite uso eficiente deles, considerando que o cache é inúmeras vezes mais rápido do que o RAM. A pilha cresce à medida em que funções são chamadas, e diminui quando retornam.
+
+--------Stack frame = Possui argumentos de função, variáveis locais, e endereço de retorno para o caller. É um bloco de dados empilhado na stack sempre que uma chamada de função é feita. Exemplo:
+
+---Ao chamar funcaoA(), um stack frame é criado. Se funcaoA chamar funcaoB(), um novo frame para funcaoB é empilhado sobre o da funcaoA. Quando funcaoB termina, seu frame é removido, e a funcaoA retoma de onde parou.
+
+--------Base Pointer e Stack Pointer (EBP e ESP no x86) = São circuitos físicos de silício dentro do CPU, feitos para facilitar processamento de funções. O base pointer é analogicamente um ponto 0 num eixo X, que é definido no stack frame que estiver sendo utilizado, e para se referir aos dados dentro desse stack frame, é utilizado o base pointer como ponto de referência para se referir a esses dados, onde, à sua esquerda (números negativos (endereços de memória menores)) é possível encontrar as variáveis locais da função (EBP -4 = Primeira variável local, EBP -8 = Segunda variável local, e assim vai) e à sua direita (números positivos (endereços de memória maiores)) é possível encontrar o endereço do caller, e os argumentos da função (EBP +4 = Endereço do caller, EBP +8 = Primeiro argumento, EBP +12 = Segundo argumento, e assim vai). O Stack Pointer basicamente aponta ao topo do stack, ou seja, mostra o argumento/variável local mais recente que foi criado no fluxo de processamento de instruções. (como a stack na RAM cresce de cabeça para baixo, o "topo" do stack para onde o ESP aponta é, na verdade, o endereço de memória mais baixo em uso naquele momento).
+
+--------chmod = É uma ferramenta utilizada em sistemas operacionais Unix-like como o linux e o MacOS, utilizado para definir as permissões de arquivo para certos usuários, onde o primeiro digito é destinado ao dono do arquivo, o segundo, ao grupo em que o arquivo vai pertencer, e o terceiro, para todo mundo. Para representar essas permissões, são utilizados os números de 0 a 7 do sistema octal, que em binário, representam do número 000 até o 111 (especificamente 3 casas), sendo cada digito de cada casa, a representação de read, write, e execute, respectivamente. Ou seja, se queremos dar permissão geral para o autor do arquivo, permissão de ler e executar para o grupo, e permissão de somente executar para todos, isso seria representado como: 111 101 001, ou seja, 111101001, que ao ser convertido para octal, fica 751, ou seja, o comando ficaria como: chmod 751. Também é possível considerar que read = 4, write = 2 e execute = 1, ou seja, 751 = 4 + 2 + 1, 4 + 1, 1, que fica 7 5 1, tornando muito mais fácil para executar o comando.
+
+--------Divisibilidade = Na base decimal, é visto que quando um número termina em 0, é possível dividir ele por 10 (2 em código binário), assim como na base hexadecimal, um número terminado em 0 pode ser dividido por 10 ou 16, e na base binária, divisível por 10.
+
+--------Aritmética de múltipla precisão e base octal = Quando um número é muito grande para caber em um tipo normal como int, ele é quebrado em pedaços menores, como um byte, que pode armazenar de valores entre 0 a 255 (2 elevado a 8), isso é aritmética de múltipla precisão. Agora, ao usar o int32 que representa 2 elevado a 32 como base, é possível armazenar de 0 a aproximadamente 4 bilhões.
+
+--------2.Conceitos práticos no Assembly Intel:
+
+--------Como posso saber que um número hexadecimal se trata de um texto ASCII?
+
+Para isso, é necessário notar que uma maioria das letras em ASCII ficam entre 0x41 e 0x7A que são de A a Z respectivamente. Além disso, é geralmente notória a densidade desses números hexadecimais, e esses números são pegos de um número hexadecimal em pares, da direita para a esquerda.
+
+--------Armazenamento de variáveis =
+
+Ao declarar uma variável em C, é colocado o valor da variável em um registrador, e então o registrador tem seu valor enviado para a stack. Por que não ir diretamente? Porque o processador não consegue fazer armazenamento direto de hexadecimais grandes, então precisa de um buffer temporário que seria justamente o registrador. 

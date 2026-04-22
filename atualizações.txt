@@ -1,0 +1,2 @@
+21/04/2026
+Conversei com o Gemini em relação às minhas anotações e agora entendi que tem matérias que não preciso anotar a documentação INTEIRA de alguma ferramenta como a MySQL, e que tem coisas mais importantes para eu focar considerando minha vontade de praticar red teaming.
