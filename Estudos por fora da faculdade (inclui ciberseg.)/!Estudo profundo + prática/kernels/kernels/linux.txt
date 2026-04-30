@@ -153,6 +153,15 @@ A flag -l irá mostrar a quantidade de linhas em um arquivo, já a flag -w irá 
 
 --------------------- grep = esse comando pode pesquisar por qualquer coisa que seja inserida dentro de aspas (""),  e logo após, o arquivo em que será pesquisado o que foi inserido (Ex: grep "ERROR" error.log). Com a flag -R, é possível procurar dentro de vários arquivos em um diretório em específico (Ex: grep -R "banana" /frutas/).
 
+--------------------- chmod = uma ferramenta nativa do linux e outros sistemas Unix-like utilizada para definir as permissões de arquivo para certos usuários, onde o primeiro digito é destinado ao dono do arquivo, o segundo, ao grupo em que o arquivo vai pertencer, e o terceiro, para todo mundo. Para representar essas permissões, são utilizados os números de 0 a 7 do sistema octal, que em binário, representam do número 000 até o 111 (especificamente 3 casas), sendo cada digito de cada casa a representação de read, write, e execute, respectivamente. Ou seja, se queremos dar permissão geral para o autor do arquivo, permissão de ler e executar para o grupo, e permissão de somente executar para todos, isso seria representado como: 111 101 001, ou seja, 111101001, que ao ser convertido para octal, fica 751, ou seja, o comando ficaria como: chmod 751. Também é possível considerar que read = 4, write = 2 e execute = 1, ou seja, 751 = 4 + 2 + 1, 4 + 1, 1, que fica 7 5 1, tornando muito mais fácil para executar o comando.
+
+Agora, como usar o comando?
+
+Para usar o comando, basta colocar o número da permissão e o arquivo que vai ter suas permissões modificadas.
+Ex:
+
+chmod 751 arquivo.exe
+
 ------------------------------------------Linux para assembly:
 
 --------------------- objdump = permite desestruturar um .exe em código assembly.

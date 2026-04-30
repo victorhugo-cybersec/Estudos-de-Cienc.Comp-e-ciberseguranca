@@ -1,0 +1,4 @@
+Operador ternário é uma maneira de facilitar condições de if/else, aqui há um exemplo:
+
+let nota = 3;
+let msg = nota >= 6 ? "Aprovado" : "Reprovado";
